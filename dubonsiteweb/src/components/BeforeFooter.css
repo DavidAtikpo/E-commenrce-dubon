@@ -1,0 +1,35 @@
+.before-footer {
+    background-color: #f06108;
+    padding: 20px;
+    color: white;
+  }
+  
+  .before-footer-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .newsletter h3 {
+    color: white;
+  }
+  
+  .newsletter-input input {
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .newsletter-input button {
+    padding: 10px 20px;
+    margin-right: 10px;
+  }
+  
+  .legal-terms {
+    margin-top: 10px;
+    color: white;
+  }
+  
+  .download-app .app-links img {
+    margin-right: 15px;
+    width: 150px;
+  }
+  

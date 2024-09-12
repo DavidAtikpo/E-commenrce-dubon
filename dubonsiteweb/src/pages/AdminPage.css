@@ -1,0 +1,26 @@
+/* AdminPage.css */
+body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .MuiAppBar-root {
+    background-color: #1976d2;
+  }
+  
+  .MuiDrawer-paper {
+    background-color: #f4f4f4;
+  }
+  
+  .MuiListItem-root:hover {
+    background-color: rgba(25, 118, 210, 0.1);
+  }
+  
+  .MuiTypography-h4 {
+    margin-bottom: 16px;
+  }
+  
+  .MuiPaper-root {
+    text-align: center;
+    color: #1976d2;
+  }
+  
