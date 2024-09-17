@@ -7,8 +7,8 @@ import logo from '../assets/logo.png';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { Link } from 'react-router-dom';
 
-const LoginPage = () => {
-  const [usePhone, setUsePhone] = useState(false); // Bascule entre email et téléphone
+const RegisterPage = () => {
+//   const [usePhone, setUsePhone] = useState(false); // Bascule entre email et téléphone
   const [phoneNumber, setPhoneNumber] = useState(''); // Stocke le numéro de téléphone
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
@@ -38,29 +38,25 @@ const LoginPage = () => {
       >
         <Typography variant="h4" gutterBottom textAlign="center">
           <img src={logo} alt="logo" style={{ width: '130px', marginRight: '10px', verticalAlign: 'middle' }} />
-          Bienvenue!
+          Inscrivez-vous ici!
         </Typography>
 
-        {/* Bascule entre connexion par email ou téléphone */}
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
-          <Button
-            variant={usePhone ? "outlined" : "contained"}
-            onClick={() => setUsePhone(false)}
-            sx={{ marginRight: '10px' }}
-          >
-            Connexion avec email
-          </Button>
-          <Button
-            variant={usePhone ? "contained" : "outlined"}
-            onClick={() => setUsePhone(true)}
-          >
-            Connexion avec téléphone
-          </Button>
-        </Box>
+        <TextField
+          fullWidth
+          label="Nom"
+          variant="outlined"
+          margin="normal"
+          type="password"
+        />
 
-        {/* Affichage du champ en fonction du mode sélectionné */}
-        {usePhone ? (
-          <PhoneInput
+       <TextField
+          fullWidth
+          label="Email"
+          variant="outlined"
+          margin="normal"
+          type="password"
+        />
+        <PhoneInput
             country={'tg'} // Définir le code par défaut sur Togo (+228)
             value={phoneNumber}
             onChange={phone => setPhoneNumber(phone)}
@@ -72,14 +68,6 @@ const LoginPage = () => {
               marginBottom: '16px',
             }}
           />
-        ) : (
-          <TextField
-            fullWidth
-            label="Email"
-            variant="outlined"
-            margin="normal"
-          />
-        )}
 
         <TextField
           fullWidth
@@ -134,4 +122,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

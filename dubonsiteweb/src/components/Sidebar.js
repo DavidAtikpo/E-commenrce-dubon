@@ -112,7 +112,7 @@
 
 // export default Sidebar;
 import React from 'react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Collapse, Toolbar } from '@mui/material';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, Collapse, } from '@mui/material';
 import { Home, ExpandLess, ExpandMore, ShoppingBag, CalendarToday, ListAlt, TableChart } from '@mui/icons-material';
 import './Sidebar.css'; // Import du fichier CSS
 
