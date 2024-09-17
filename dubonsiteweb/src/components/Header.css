@@ -1,0 +1,41 @@
+/* Header.css */
+
+.header-appbar {
+  background-color: white;
+}
+
+.header-logo {
+  max-width: 60px; /* Ajuste selon la taille de ton logo */
+  margin-left: 50px
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  background-color: #f1f3f4;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.header-search input {
+  margin-left: 8px;
+  border: none;
+  outline: none;
+}
+
+.header-icon {
+  margin-left: 16px;
+}
+
+/* Styles pour mobile */
+@media (max-width: 600px) {
+  .header-search {
+    flex-grow: 1;
+  }
+
+  .header-logo {
+    display: flex;
+    justify-content: center;
+    width: auto;
+  }
+}

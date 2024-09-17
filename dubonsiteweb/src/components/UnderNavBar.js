@@ -21,43 +21,44 @@ function NavBar() {
           onMouseEnter={() => handleMouseEnter('appliances')}
           onMouseLeave={handleMouseLeave}
         >
-          Service Complet
+          Produits
           {activeDropdown === 'appliances' && (
             <div className="dropdown">
               <div className="dropdown-column">
-                <h4>Viandes Congelées</h4>
+                <h4>Produit Congeles</h4>
                 <ul>
-                  <li>Poulet congelé</li>
-                  <li>Boeuf congelé</li>
+                  <li>Viandes</li>
+                  <li>Poissons</li>
                   <li>Dinde</li>
-                  <li>Poison congelé</li>
                 </ul>
               </div>
               <div className="dropdown-column">
-                <h4>Légumes Congelés</h4>
+                <h4>Produit Frais</h4>
                 <ul>
-                  <li>Petit pois</li>
-                  <li>Carottes</li>
-                  <li>Epinards</li>
-                  <li>Haricots verts</li>
+                  <li>Lapins</li>
+                  <li>Poulet Byciclette</li>
                 </ul>
               </div>
               <div className="dropdown-column">
-                <h4>Fruits Congelés</h4>
+                <h4>Agro-alimentaire</h4>
                 <ul>
-                  <li>Fraises</li>
-                  <li>Mangues</li>
-                  <li>Myrtlles</li>
-                  <li>Ananas</li>
+                  <li>Pates alimentaires</li>
+                  <li>Oleagineux</li>
                 </ul>
               </div>
 
               <div className="dropdown-column">
-                <h4>Plats Préparés Congelés</h4>
+                <h4>Boissons</h4>
                 <ul>
-                  <li>Pizzas</li>
-                  <li>Lasagnes</li>
+                  <li>Vins et Siriteux</li>
+                  <li>Campagnes</li>
                   <li>Nuggets de poulet</li>
+                </ul>
+              </div>
+              <div className="dropdown-column">
+                <h4>Page</h4>
+                <ul>
+                  <li>Produits SOBEBRA</li>
                 </ul>
               </div>
             </div>
@@ -68,12 +69,12 @@ function NavBar() {
         <li className="nav-item"
         onMouseEnter={() => handleMouseEnter('produit-congeles')}
         onMouseLeave={handleMouseLeave}
-        >Produit Congeles
+        >Service
         {activeDropdown === 'produit-congeles' && (
             <div className="dropdown">
               <div className="dropdown-column">
-                <h4>Small Appliances</h4>
-                <ul>
+                <h4>DUBON Menage</h4>
+                {/* <ul>
                   <li>Blenders</li>
                   <li>Deep Fryers</li>
                   <li>Juicers</li>
@@ -85,11 +86,11 @@ function NavBar() {
                   <li>Kettles</li>
                   <li>Yam Pounders</li>
                   <li>Irons</li>
-                </ul>
+                </ul> */}
               </div>
               <div className="dropdown-column">
-                <h4>Large Appliances</h4>
-                <ul>
+                <h4>DUBON Express</h4>
+                {/* <ul>
                   <li>Washing Machines</li>
                   <li>Fridges</li>
                   <li>Freezers</li>
@@ -99,16 +100,34 @@ function NavBar() {
                   <li>Air Purifiers</li>
                   <li>Water Dispensers</li>
                   <li>Generators & Inverters</li>
-                </ul>
+                </ul> */}
               </div>
               <div className="dropdown-column">
-                <h4>Brands</h4>
-                <ul>
+                <h4>Maman HOUEVIHNON</h4>
+                {/* <ul>
                   <li>Nexus</li>
                   <li>Hisense</li>
                   <li>Polystar</li>
                   <li>TCL</li>
-                </ul>
+                </ul> */}
+              </div>
+              <div className="dropdown-column">
+                <h4>Frigo Relais</h4>
+                {/* <ul>
+                  <li>Nexus</li>
+                  <li>Hisense</li>
+                  <li>Polystar</li>
+                  <li>TCL</li>
+                </ul> */}
+              </div>
+              <div className="dropdown-column">
+                <h4>DUBON Hygiene</h4>
+                {/* <ul>
+                  <li>Nexus</li>
+                  <li>Hisense</li>
+                  <li>Polystar</li>
+                  <li>TCL</li>
+                </ul> */}
               </div>
             </div>
           )}
@@ -118,52 +137,43 @@ function NavBar() {
         <li className="nav-item"
         onMouseEnter={() => handleMouseEnter('import-export')}
         onMouseLeave={handleMouseLeave}
-        >Import-Export
+        >Evenementiel
         {activeDropdown === 'import-export' && (
             <div className="dropdown">
               <div className="dropdown-column">
-                <h4>Produits Agricoles</h4>
+                <h4>Location de Salle</h4>
                 <ul>
-                  <li>Cacao</li>
-                  <li>Cafe</li>
-                  <li>Riz</li>
-                  <li>Céréales (maïs, blé)</li>
-                  <li>Huiles végétales</li>
+                  <li>Standars</li>
+                  <li>VIP</li>
                 </ul>
               </div>
 
               <div className="dropdown-column">
-                <h4>Produits de la Mer</h4>
-                <ul>
+                <h4>Service Traiteurs</h4>
+                {/* <ul>
                   <li>Poissons frais ou surgelés</li>
                   <li>Fruits de mer (crevettes, calamars, etc.)</li>
                   <li>Algues alimentaires</li>
+                </ul> */}
+              </div>
+
+              <div className="dropdown-column">
+                <h4>Organisation d'evenement</h4>
+                <ul>
+                  <li>Mariage</li>
+                  <li>Concert</li>
+                  <li>anniversaire</li>
+                  <li>Bapteme</li>
+                  <li>Funerailles</li>
                 </ul>
               </div>
 
               <div className="dropdown-column">
-                <h4>Textiles et Vêtements</h4>
-                <ul>
-                  <li>Tissus en coton</li>
-                  <li>Vêtements fabriqués localement</li>
-                  <li>Chaussures</li>
-                </ul>
-              </div>
-
-              <div className="dropdown-column">
-                <h4>Équipements Industriels</h4>
-                <ul>
+                <h4>Couverture Mediatique</h4>
+                {/* <ul>
                   <li>Machines agricoles</li>
                   <li>Matériaux de construction (ciment, fer, bois)</li>
-                </ul>
-              </div>
-              <div className="dropdown-column">
-                <h4>Produits de Luxe </h4>
-                <ul>
-                  <li>Vins et spiritueux</li>
-                  <li>Bijoux</li>
-                  <li>Voitures de luxe</li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           )}
@@ -173,17 +183,14 @@ function NavBar() {
         <li className="nav-item"
         onMouseEnter={() => handleMouseEnter('evenementiel')}
         onMouseLeave={handleMouseLeave}
-        >Evenementiel
-        {activeDropdown === 'evenementiel' && (
+        >Import & Export
+        {/* {activeDropdown === 'evenementiel' && (
             <div className="dropdown">
               <div className="dropdown-column">
-                <h4>Services</h4>
+                <h4>E-Restaurant</h4>
                 <ul>
-                  <li>Organisation de mariages</li>
-                  <li>Organisation de séminaires et conférences</li>
-                  <li>Planification de fêtes et anniversaires</li>
-                  <li>Décoration événementielle</li>
-                  <li>Animation (DJ, orchestres, spectacles)</li>
+                  <li>Mets Africain</li>
+                  <li>Rooftop</li>
                 </ul>
               </div>
               <div className="dropdown-column">
@@ -214,35 +221,33 @@ function NavBar() {
               </div>
               
             </div>
-          )}
+          )} */}
         </li>
 
         {/* Add other categories as needed */}
         <li className="nav-item"
         onMouseEnter={() => handleMouseEnter('agro-alimentaire')}
         onMouseLeave={handleMouseLeave}
-        >Agro-alimentaire
+        >E-Restaurant
         {activeDropdown === 'agro-alimentaire' && (
             <div className="dropdown">
               <div className="dropdown-column">
-                <h4>Produits Transformés</h4>
-                <ul>
-                  <li>Jus de fruits</li>
-                  <li>Confitures</li>
-                  <li>Conserves de légumes</li>
-                  <li>Pâtes alimentaires</li>
-                </ul>
+                <h4>Mets Africain</h4>
+                {/* <ul>
+                  <li>Mets Africain</li>
+                  <li>Rooftop</li>
+                </ul> */}
               </div>
               <div className="dropdown-column">
-                <h4>Produits Laitiers</h4>
-                <ul>
+                <h4>Rooftop</h4>
+                {/* <ul>
                   <li>Lait</li>
                   <li>Fromages</li>
                   <li>Yaourts</li>
                   <li>Beurre</li>
-                </ul>
+                </ul> */}
               </div>
-              <div className="dropdown-column">
+              {/* <div className="dropdown-column">
                 <h4>Céréales et Dérivés</h4>
                 <ul>
                   <li>Farine</li>
@@ -266,7 +271,7 @@ function NavBar() {
                   <li>Boissons gazeuses</li>
                   <li>Eau minérale</li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           )}
         </li>

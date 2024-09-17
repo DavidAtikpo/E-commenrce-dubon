@@ -1,51 +1,117 @@
 .navbar {
-    background-color: #fff;
-    padding: 10px;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.nav-categories {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap; /* Pour que les éléments se replient sur les petits écrans */
+}
+
+.nav-item {
+  position: relative;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  color: orange;
+}
+
+h4 {
+  color: blue;
+}
+
+ul {
+  color: black;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dropdown-column {
+  margin-right: 10px;
+  width: 120px;
+}
+
+.dropdown-column h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dropdown-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dropdown-column ul li {
+  margin-bottom: 5px;
+}
+
+/* Styles pour les tablettes */
+@media (max-width: 768px) {
+  .navbar {
+      padding: 8px;
   }
-  
+
   .nav-categories {
-    display: flex;
-    list-style: none;
+      flex-direction: column; /* Affiche les éléments de navigation en colonne */
+      align-items: center;
   }
-  
+
   .nav-item {
-    position: relative;
-    margin-right: 20px;
-    cursor: pointer;
+      margin-right: 0;
+      margin-bottom: 10px;
   }
-  
-  .nav-item:hover {
-    color: orange;
-  }
-  
+
   .dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    display: flex;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+      flex-direction: column; /* Réorganise les colonnes du menu déroulant en ligne */
+      padding: 10px;
   }
-  
+
   .dropdown-column {
-    margin-right: 40px;
+      width: 100%; /* Les colonnes prennent toute la largeur */
+      margin-right: 0;
+      margin-bottom: 15px;
   }
-  
-  .dropdown-column h4 {
-    margin-bottom: 10px;
-    font-size: 16px;
-    font-weight: bold;
+}
+
+/* Styles pour les mobiles */
+@media (max-width: 480px) {
+  .navbar {
+      padding: 5px;
   }
-  
-  .dropdown-column ul {
-    list-style: none;
-    padding: 0;
+
+  .nav-categories {
+      flex-direction: column; /* Colonne pour une meilleure lisibilité sur mobile */
+      align-items: center;
   }
-  
-  .dropdown-column ul li {
-    margin-bottom: 5px;
+
+  .nav-item {
+      margin-right: 0;
+      margin-bottom: 10px;
   }
+
+  .dropdown {
+      flex-direction: column; /* Le menu déroulant est en ligne sur mobile */
+      padding: 8px;
+  }
+
+  .dropdown-column {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+}
+
   

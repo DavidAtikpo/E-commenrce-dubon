@@ -1,46 +1,87 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
-import './AddProductPage.css'
+import { useDropzone } from 'react-dropzone';  
+import './AddProductPage.css';
 
 const AddProductPage = () => {
-  // Initialiser l'état pour stocker les données du formulaire
-  const [productName, setProductName] = useState('');
-  const [productCategory, setProductCategory] = useState('');
-  const [productPrice, setProductPrice] = useState('');
-  const [productDiscount, setProductDiscount] = useState('');
-  const [productDescription, setProductDescription] = useState('');
-  const [metaTitle, setMetaTitle] = useState('');
-  const [metaName, setMetaName] = useState('');
-  const [metaTags, setMetaTags] = useState('');
-  const [metaDescription, setMetaDescription] = useState('');
+  const [title, setTitle] = useState('');
+  const [slug, setSlug] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [discount, setDiscount] = useState('');
+  const [category, setCategory] = useState('');
+  // const [brand, setBrand] = useState('');
+  const [quantity, setQuantity] = useState('');
+  // const [color, setColor] = useState('');
+  const [tags, setTags] = useState('');
+  const [productImages, setProductImages] = useState([]);  
+  const [imagePreviews, setImagePreviews] = useState([]);  
 
-//   const navigate = useNavigate();
+  // Gérer les fichiers lorsqu'ils sont déposés ou sélectionnés
+  const onDrop = (acceptedFiles) => {
+    setProductImages(prevImages => [...prevImages, ...acceptedFiles]);  
+    const newPreviews = acceptedFiles.map(file => URL.createObjectURL(file));
+    setImagePreviews(prevPreviews => [...prevPreviews, ...newPreviews]);  
+  };
+  const removeImage = (indexToRemove) => {
+    // Filtrer les images et les aperçus qui ne correspondent pas à l'index à supprimer
+    const updatedImages = productImages.filter((_, index) => index !== indexToRemove);
+    const updatedPreviews = imagePreviews.filter((_, index) => index !== indexToRemove);
 
-  // Fonction pour gérer la soumission du formulaire
+    setProductImages(updatedImages);
+    setImagePreviews(updatedPreviews);
+  };
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: 'image/*',
+    multiple: true
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const productData = {
-      name: productName,
-      category: productCategory,
-      price: productPrice,
-      discount: productDiscount,
-      description: productDescription,
-      meta: {
-        title: metaTitle,
-        name: metaName,
-        tags: metaTags,
-        description: metaDescription
-      }
+      title,
+      slug,
+      description,
+      price,
+      discount,
+      category,
+      // brand,
+      quantity,
+      // color,
+      tags: tags.split(','), 
     };
 
+    const formData = new FormData();
+    formData.append('productData', JSON.stringify(productData));
+    
+    // Modifier l'ajout des images sans indexation
+    productImages.forEach((file) => {
+      formData.append('images', file);
+    });
+
     try {
-      // Envoyer une requête POST à votre backend
-      const response = await axios.post('http://votre-backend-url/api/products', productData);
+      const response = await axios.post('http://localhost:5000/api/product/add-products', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
       if (response.status === 201) {
         alert('Produit ajouté avec succès');
+        setTitle('');
+        setSlug('');
+        setDescription('');
+        setPrice('');
+        setDiscount('');
+        setCategory('');
+        // setBrand('');
+        setQuantity('');
+        // setColor('');
+        setTags('');
+        setProductImages([]);
+        setImagePreviews([]);
       }
     } catch (error) {
       console.error('Erreur lors de l\'ajout du produit :', error);
@@ -52,48 +93,81 @@ const AddProductPage = () => {
     <div className="add-product-page">
       <h1>Product Information</h1>
       <form onSubmit={handleSubmit}>
-        <div className="general-info">
-          <h2>General Information</h2>
-          <label>Product Name *</label>
-          <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} required />
+        <div className='product'>
+          <div className="general-info">
+            <h2>General Information</h2>
+            <label>Titre *</label>
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
 
-          <label>Product Category *</label>
-          <select value={productCategory} onChange={(e) => setProductCategory(e.target.value)} required>
-            <option value="">Select Product Category</option>
-            <option value="electronics">Electronics</option>
-            <option value="home-decor">Home Decor</option>
-            {/* Ajouter d'autres catégories ici */}
-          </select>
+            <label>Slug *</label>
+            <input type="text" value={slug} onChange={(e) => setSlug(e.target.value)} required />
 
-          <label>Product Price *</label>
-          <input type="number" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} required />
+            <label>Description *</label>
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
 
-          <label>Product Discount (%)</label>
-          <input type="number" value={productDiscount} onChange={(e) => setProductDiscount(e.target.value)} />
+            <label>Prix *</label>
+            <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />
 
-          <label>Product Description *</label>
-          <textarea value={productDescription} onChange={(e) => setProductDescription(e.target.value)} required></textarea>
+            <label>Remise (%)</label>
+            <input type="number" value={discount} onChange={(e) => setDiscount(e.target.value)} />
+
+            <label>Categorie *</label>
+            <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+              <option value="Produit">Produit</option>
+              <option value="Service">Service</option>
+              <option value="Evenementiel">Evenementiel</option>
+              <option value="Import-Export">Import-Export</option>
+              <option value="E-Restaurant">E-Restaurant</option>
+              <option value="Produit frais">Produit frais</option>
+            </select>
+
+            {/* <label>Brand *</label> */}
+            {/* <input type="text" value={brand} onChange={(e) => setBrand(e.target.value)} required /> */}
+
+            <label>Quantite *</label>
+            <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} required />
+
+            {/* <label>Color *</label> */}
+            {/* <input type="text" value={color} onChange={(e) => setColor(e.target.value)} required /> */}
+
+            <label>Mot-cles (comma-separated)</label>
+            <input type="text" value={tags} onChange={(e) => setTags(e.target.value)} />
+          </div>
         </div>
 
-        <div className="meta-info">
-          <h2>Meta Data</h2>
-          <label>Meta Title *</label>
-          <input type="text" value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} required />
+        <div className="upload-section">
+          <h2>Product Images</h2>
+          <div {...getRootProps()} className="dropzone">
+            <input {...getInputProps()} />
+            <p>Drop files here or click to upload.</p>
+          </div>
 
-          <label>Meta Name *</label>
-          <input type="text" value={metaName} onChange={(e) => setMetaName(e.target.value)} required />
-
-          <label>Meta Tags *</label>
-          <input type="text" value={metaTags} onChange={(e) => setMetaTags(e.target.value)} required />
-
-          <label>Meta Description *</label>
-          <textarea value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} required></textarea>
+          {imagePreviews.length > 0 && (
+            <div className="image-previews">
+              {/* <h4>Image Previews:</h4> */}
+              <div className="preview-grid">
+                {imagePreviews.map((preview, index) => (
+                  <div key={index} className="preview-item">
+                    <img src={preview} alt={`Preview ${index + 1}`} className="preview-image" />
+                    {/* Bouton pour supprimer l'image */}
+                    <button className="remove-image" onClick={() => removeImage(index)}>✖</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
-        <button type="submit">Add Product</button>
+        <div className='button-container'>
+          <button type="button" className='cancel-btn'>Cancel</button>
+          <button type="submit">Add Product</button>
+        </div>
       </form>
     </div>
   );
 };
 
 export default AddProductPage;
+
+
+

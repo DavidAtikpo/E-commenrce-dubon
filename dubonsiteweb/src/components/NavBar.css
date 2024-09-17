@@ -5,27 +5,27 @@
     padding: 10px 20px;
     background-color: #f8f8f8;
     border-bottom: 1px solid #ddd;
-  }
-  
-  .navbar-logo img {
+}
+
+.navbar-logo img {
     height: 40px;
-  }
-  
-  .navbar-search {
+}
+
+.navbar-search {
     display: flex;
     align-items: center;
     flex-grow: 1;
     margin: 0 20px;
-  }
-  
-  .navbar-search input {
+}
+
+.navbar-search input {
     width: 60%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
-  
-  .search-btn {
+}
+
+.search-btn {
     background-color: #3700ff;
     color: white;
     padding: 8px 12px;
@@ -34,61 +34,167 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-  }
-  
-  .search-btn svg {
+}
+
+.search-btn svg {
     margin-right: 5px;
-  }
-  
-  .navbar-menu {
+}
+
+.navbar-menu {
     display: flex;
     align-items: center;
-  }
-  
-  .navbar-item {
+}
+
+.navbar-item {
     display: flex;
     align-items: center;
     margin-left: 20px;
     cursor: pointer;
-  }
-  
-  .navbar-item svg {
+}
+
+.navbar-item svg {
     margin-right: 5px;
-  }
-  .navbar {
+}
+
+.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
     background-color: #fff;
-  }
-  
-  .navbar-logo img {
-    width: 120px;  /* Adjust the width as needed */
+}
+
+.navbar-logo img {
+    width: 120px; /* Adjust the width as needed */
     height: auto;
-  }
-  
-  .navbar-links {
+}
+
+.navbar-links {
     display: flex;
     align-items: center;
-  }
-  
-  .navbar-links input {
+}
+
+.navbar-links input {
     margin-right: 10px;
     padding: 5px;
-  }
-  
-  .navbar-links span {
+}
+
+.navbar-links span {
     margin-left: 20px;
     cursor: pointer;
-  }
-  
-  .navbar-links button {
+}
+
+.navbar-links button {
     margin-right: 20px;
     padding: 6px 12px;
     background-color: orange;
     border: none;
     color: white;
     cursor: pointer;
-  }
+}
+
+/* Styles pour tablettes */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .navbar-logo img {
+        width: 100px;
+    }
+
+    .navbar-search {
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    .navbar-search input {
+        width: 80%; /* Étendre l'entrée de recherche sur les petits écrans */
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .navbar-links span {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* Styles pour mobiles */
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px;
+    }
+
+    .navbar-logo img {
+        width: 80px;
+    }
+
+    .navbar-search {
+        width: 100%;
+    }
+
+    .navbar-search input {
+        width: 100%; /* L'entrée de recherche prend toute la largeur */
+    }
+
+    .navbar-menu {
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .navbar-item {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .navbar-links span {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .navbar-links button {
+        width: 100%;
+    }
+}
+.navbar-hamburger {
+  display: none; /* Cacher sur les grands écrans */
+  cursor: pointer;
   
+}
+
+/* Styles pour mobiles */
+@media (max-width: 480px) {
+  .navbar-hamburger {
+    margin-left: 340px;
+    margin-top: -50px;
+    display: block; /* Afficher l'icône hamburger sur les petits écrans */
+  }
+
+  .navbar-menu {
+    display: none; /* Cacher par défaut */
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    padding-top: 0px; /* Ajoute de l'espacement si nécessaire */
+  }
+
+  .navbar-menu.open {
+    display: flex; /* Afficher lorsque le menu hamburger est activé */
+  }
+}

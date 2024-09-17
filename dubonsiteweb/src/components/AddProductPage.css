@@ -1,49 +1,209 @@
+/* Styles de base */
 .add-product-page {
-    width: 80%;
-    margin: 0 auto;
-  }
-  
-  .add-product-page form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
+  /* width: 100%; */
+  margin: 0 auto;
+  padding: 20px;
+  /* border: 1px solid #ccc;
+  border-radius: 5px; */
+}
+/* .content{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+} */
+/* .add-product-page form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+} */
+.product{
+  display: flex;
+  justify-content: space-between;
+}
+.general-info, .meta-info {
+  width: 45%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.general-info h2, .meta-info h2 {
+  margin-bottom: 10px;
+  color:blue
+}
+
+.general-info label, .meta-info label {
+  display: block;
+  margin-top: 10px;
+}
+
+.general-info input, .meta-info input, 
+.general-info textarea, .meta-info textarea, 
+.general-info select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.upload-section{
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.dropzone {
+  border: 2px dashed #cccccc;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.dropzone p {
+  color: #666;
+}
+
+.dropzone ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Styles pour les boutons */
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Aligner à droite */
+  gap: 10px; /* Espace entre les boutons */
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.cancel-btn {
+  background-color: #6c757d; /* Gris pour le bouton Cancel */
+}
+
+.cancel-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Responsive Styles */
+
+/* Petits écrans (téléphones) */
+@media (max-width: 768px) {
   .general-info, .meta-info {
-    width: 45%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  .general-info h2, .meta-info h2 {
-    margin-bottom: 10px;
-  }
-  
-  .general-info label, .meta-info label {
-    display: block;
-    margin-top: 10px;
-  }
-  
-  .general-info input, .meta-info input, .general-info textarea, .meta-info textarea, .general-info select {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
   }
-  
+
+  .add-product-page {
+    width: 95%;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    width: 100%;
   }
-  
-  button:hover {
-    background-color: #0056b3;
+}
+
+/* Tablettes (moyenne largeur d'écran) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .general-info, .meta-info {
+    width: 48%;
   }
-  
+
+  .add-product-page {
+    width: 90%;
+  }
+
+  button {
+    width: auto;
+  }
+}
+.add-product-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.upload-section {
+  margin-top: 20px;
+}
+
+.image-previews {
+  margin-top: 10px;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Grille responsive */
+  gap: 10px; /* Espacement entre les images */
+}
+
+.preview-item {
+  border: 1px solid #ddd;
+  padding: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.preview-image {
+  width: 100%; /* Ajuste l'image à l'espace disponible */
+  height: 100px; /* Fixe une hauteur uniforme */
+  object-fit: cover; /* Garde les proportions de l'image */
+  border-radius: 5px; /* Coins arrondis pour les images */
+}
+
+/* .image-previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+} */
+
+.preview-item {
+  position: relative;
+  display: inline-block;
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.remove-image {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: red;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.remove-image:hover {
+  background: darkred;
+}

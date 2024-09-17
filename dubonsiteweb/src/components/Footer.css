@@ -1,64 +1,106 @@
-
 .footer {
-    background-color: #100550;
-    color: white;
-    padding: 20px;
-  }
-  
-  .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
+  background-color: #100550;
+  color: white;
+  padding: 20px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-section {
+  width: 18%;
+  margin-bottom: 20px;
+}
+
+.footer-section h4 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid #ccc;
+}
+
+.footer-socials h5,
+.footer-payment h5 {
+  font-size: 1rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icons i {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.payment-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.payment-icons i {
+  font-size: 1.5rem;
+}
+
+/* Media Queries pour tablettes */
+@media (max-width: 768px) {
   .footer-section {
-    width: 18%;
+    width: 45%; /* Largeur ajustée pour deux colonnes sur les tablettes */
+    margin-bottom: 20px;
   }
-  
-  .footer-section h4 {
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  
-  .footer-section ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .footer-section ul li {
-    font-size: 0.875rem;
-    margin-bottom: 8px;
-  }
-  
+
   .footer-bottom {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    padding: 20px 0;
-    border-top: 1px solid #ccc;
+    text-align: center;
   }
-  
+
   .footer-socials h5,
   .footer-payment h5 {
-    font-size: 1rem;
+    margin-bottom: 10px;
   }
-  
-  .social-icons {
-    display: flex;
-    gap: 10px;
+}
+
+/* Media Queries pour mobiles */
+@media (max-width: 480px) {
+  .footer-section {
+    width: 100%; /* Largeur ajustée pour une colonne sur mobile */
+    margin-bottom: 20px;
   }
-  
-  .social-icons i {
-    font-size: 1.5rem;
-    cursor: pointer;
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-  
-  .payment-icons {
-    display: flex;
-    gap: 10px;
+
+  .footer-socials h5,
+  .footer-payment h5 {
+    margin-bottom: 10px;
   }
-  
+
+  .social-icons i,
   .payment-icons i {
-    font-size: 1.5rem;
+    font-size: 1.2rem; /* Réduction de la taille des icônes pour les petits écrans */
   }
-  
+}

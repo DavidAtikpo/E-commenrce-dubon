@@ -1,0 +1,67 @@
+/* Conteneur de la Sidebar */
+.sidebar-container {
+    position: relative;
+    background-color: #f4f4f4;
+    height: 100%;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ddd;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* List items dans la Sidebar */
+  .sidebar-container .MuiListItem-button {
+    padding: 15px;
+    color: #333;
+  }
+  
+  .sidebar-container .MuiListItemIcon-root {
+    color: #666;
+  }
+  
+  /* Couleur au survol */
+  .sidebar-container .MuiListItem-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Sous-menu pour les produits */
+  .sidebar-container .MuiCollapse-root .MuiListItem-button {
+    padding-left: 40px;
+  }
+  
+  /* Sélection active */
+  .sidebar-container .MuiListItem-button.Mui-selected {
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  .sidebar-container .MuiListItem-button.Mui-selected:hover {
+    background-color: #115293;
+  }
+  
+  /* Icônes */
+  .sidebar-container .MuiListItemIcon-root {
+    min-width: 40px;
+  }
+  
+  /* Texte dans la sidebar */
+  .sidebar-container .MuiListItemText-primary {
+    font-weight: 500;
+  }
+  
+  /* Ajustement pour les petits écrans */
+  @media (max-width: 600px) {
+    .sidebar-container {
+      width: 200px;
+    }
+    
+    .sidebar-container .MuiListItemText-primary {
+      font-size: 14px;
+    }
+    
+    .sidebar-container .MuiListItemIcon-root {
+      min-width: 30px;
+    }
+  }
+  
