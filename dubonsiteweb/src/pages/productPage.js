@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import '..//productPage.css';
+import '../styles/pages/productPage.css';
+import Footer from '../components/Footer';
+import NavBar from '../components/NavBar';
+import BeforeFooter from '../components/BeforeFooter';
 
 const ProductPage = () => {
     const { productId } = useParams();  // Pour obtenir l'ID du produit depuis l'URL
@@ -20,6 +23,7 @@ const ProductPage = () => {
 
     return (
         <div className="product-page">
+            <NavBar/>
             {/* En-tête produit (image et titre) */}
             <div className="product-header">
                 <img src={product.image} alt={product.name} className="product-image" />
@@ -72,6 +76,8 @@ const ProductPage = () => {
                 <h3>Questions about this product?</h3>
                 <button className="chat-btn">Chat</button>
             </div>
+            <BeforeFooter/>
+            <Footer/>
         </div>
     );
 };
