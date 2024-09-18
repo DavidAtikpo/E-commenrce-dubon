@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Box, CssBaseline, Toolbar } from '@mui/material';
-import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
+import Sidebar from '../../components/Sidebar';
+import Header from '../../components/Header';
 import useMediaQuery from '@mui/material/useMediaQuery'; // Pour la gestion des écrans
 import { useTheme } from '@mui/material/styles';
-import AddProductPage from '../components/AddProductPage';
+import AddProductPage from '../../components/AddProductPage';
+import '../../styles/pages/AdminPage.css'
 
 const AdminPage = () => {
   const [selectedMenu, setSelectedMenu] = useState('dashboard'); // Gérer le menu sélectionné

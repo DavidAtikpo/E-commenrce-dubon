@@ -3,17 +3,23 @@ import { Button, TextField, Box, Typography } from '@mui/material';
 import logo from '../../assets/logo.png'; // Assurez-vous que le chemin vers l'image est correct
 import { Link } from 'react-router-dom';
 
-const ForgotPasswordPage = () => {
-  const [email, setEmail] = useState('');
+const ResetPasswordPage = () => {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Logique pour envoyer l'e-mail de réinitialisation de mot de passe ici...
-    // Par exemple, faire une requête POST vers le backend avec l'email
+    if (password !== confirmPassword) {
+      setMessage("Les mots de passe ne correspondent pas.");
+      return;
+    }
 
-    setMessage("Un lien de réinitialisation de mot de passe a été envoyé à votre adresse e-mail.");
+    // Logique pour réinitialiser le mot de passe ici...
+    // Par exemple, faire une requête POST vers le backend
+
+    setMessage("Votre mot de passe a été réinitialisé avec succès.");
   };
 
   return (
@@ -39,21 +45,31 @@ const ForgotPasswordPage = () => {
       >
         <Typography variant="h4" gutterBottom textAlign="center">
           <img src={logo} alt="logo" style={{ width: '130px', marginRight: '10px', verticalAlign: 'middle' }} />
-          Mot de passe oublié
+          Réinitialisez votre mot de passe
         </Typography>
 
         <TextField
           fullWidth
-          label="Adresse e-mail"
+          label="Nouveau mot de passe"
           variant="outlined"
           margin="normal"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <TextField
+          fullWidth
+          label="Confirmer le mot de passe"
+          variant="outlined"
+          margin="normal"
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
 
         {message && (
-          <Typography variant="body2" color="success" gutterBottom>
+          <Typography variant="body2" color="error" gutterBottom>
             {message}
           </Typography>
         )}
@@ -65,7 +81,7 @@ const ForgotPasswordPage = () => {
           sx={{ marginTop: '16px', backgroundColor: '#f60' }}
           onClick={handleSubmit}
         >
-          Envoyer le lien de réinitialisation
+          Réinitialiser le mot de passe
         </Button>
 
         <Box textAlign="center" mt={2}>
@@ -81,4 +97,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage;
+export default ResetPasswordPage;

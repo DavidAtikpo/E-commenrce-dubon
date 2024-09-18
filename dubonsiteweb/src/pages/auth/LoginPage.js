@@ -3,7 +3,7 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { Button, TextField, Box, Typography } from '@mui/material';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { Link } from 'react-router-dom';
 
@@ -36,13 +36,14 @@ const LoginPage = () => {
           borderRadius: '8px'
         }}
       >
-        <Typography variant="h4" gutterBottom textAlign="center">
-          <img src={logo} alt="logo" style={{ width: '130px', marginRight: '10px', verticalAlign: 'middle' }} />
+       <Link to={'/'}> <Typography variant="h5" gutterBottom textAlign="center">
+          <img src={logo} alt="logo" style={{ width: '120px', marginRight: '10px', verticalAlign: 'middle' }} />
           Bienvenue!
         </Typography>
+        </Link>
 
         {/* Bascule entre connexion par email ou téléphone */}
-        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '10px',}}>
           <Button
             variant={usePhone ? "outlined" : "contained"}
             onClick={() => setUsePhone(false)}
@@ -66,10 +67,10 @@ const LoginPage = () => {
             onChange={phone => setPhoneNumber(phone)}
             inputStyle={{
               width: '100%',
-              marginBottom: '16px',
+              marginBottom: '10px',
             }}
             containerStyle={{
-              marginBottom: '16px',
+              marginBottom: '10px',
             }}
           />
         ) : (
@@ -88,30 +89,25 @@ const LoginPage = () => {
           margin="normal"
           type="password"
         />
-        
+         <Link to={'/forgot-password'}><Link/> <Typography variant="body2" textAlign="right" sx={{ marginBottom: '10px' }}>
+          Mot de passe oublié ?
+        </Typography>
+        </Link>
         <Button
           fullWidth
           variant="contained"
           color="primary"
-          sx={{ marginBottom: '16px', backgroundColor: '#f60' }}
+          sx={{ marginBottom: '10px', backgroundColor: '#f60' }}
         >
           Se connecter
         </Button>
-
-        <Typography variant="body2" textAlign="center" sx={{ marginBottom: '16px' }}>
-          Mot de passe oublié ?
-        </Typography>
-        <Box textAlign="center" mt={2}>
-          <Typography variant="body2">
-            {/* Connectez-vous avec <span onClick={() => setUsePhone(!usePhone)} style={{ cursor: 'pointer', color: '#f60' }}>
-              {usePhone ? 'un email' : 'un numéro'}
-            </span> */}
+        
+          <Typography variant="body1" textAlign="right">
             <Link to={'/register'}>
             Creer un
             <span style={{cursor:'poiter', color:'#f60'}}> compte </span>
             </Link>
           </Typography>
-        </Box>
 
         <Button
           fullWidth
@@ -129,6 +125,7 @@ const LoginPage = () => {
             width="100%"
           />
         </GoogleOAuthProvider>
+      <span style={{color:'blue'}}>Conditions d'utilisation et politique de confidentialite</span>
       </Box>
     </Box>
   );
