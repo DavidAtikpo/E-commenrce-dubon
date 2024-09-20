@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './Main.css';
+import './product.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Ajout de useNavigate
 
-const Main = () => {
+const Product = () => {
   const [productsByCategory, setProductsByCategory] = useState({});
-  const [imageIndexes, setImageIndexes] = useState({}); // Stocker l'index des images par produit
+  const [imageIndexes, setImageIndexes] = useState({});
+  const navigate = useNavigate(); // Utilisation de useNavigate
 
-  // Fonction pour regrouper les produits par catégorie
   const groupByCategory = (products) => {
     return products.reduce((acc, product) => {
       const category = product.category;
@@ -18,15 +19,13 @@ const Main = () => {
     }, {});
   };
 
-  // Fonction pour récupérer les produits du backend
   useEffect(() => {
     axios.get('http://localhost:5000/api/product/')
       .then(response => {
-        const products = response.data; // Récupère la liste des produits
-        const groupedProducts = groupByCategory(products); // Regroupe par catégorie
+        const products = response.data;
+        const groupedProducts = groupByCategory(products);
         setProductsByCategory(groupedProducts);
 
-        // Initialiser les index des images pour chaque produit à 0
         const initialIndexes = {};
         products.forEach(product => {
           initialIndexes[product._id] = 0;
@@ -38,39 +37,19 @@ const Main = () => {
       });
   }, []);
 
-  // Fonction pour faire défiler les images des produits
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setImageIndexes((prevIndexes) => {
-        const newIndexes = { ...prevIndexes };
-
-        // Pour chaque produit, incrémenter l'index ou revenir à 0 si à la fin de la liste des images
-        Object.keys(newIndexes).forEach(productId => {
-          const product = Object.values(productsByCategory).flat().find(p => p._id === productId);
-          if (product && product.images.length > 1) {
-            newIndexes[productId] = (newIndexes[productId] + 1) % product.images.length;
-          }
-        });
-
-        return newIndexes;
-      });
-    }, 3000); // 0,3 secondes
-
-    // Nettoyage de l'intervalle à la fin du composant
-    return () => clearInterval(interval);
-  }, [productsByCategory]);
+  const handleProductClick = (productId) => {
+    navigate(`/productPage/${productId}`); // Redirection vers la page de détail du produit
+  };
 
   return (
     <div className="main-container">
       <h2>Categories</h2>
-
-      {/* Parcours des catégories et produits */}
       {Object.keys(productsByCategory).map((category, index) => (
         <div key={index} className="category-section">
           <h2 style={{ color: 'blue' }}>{category}</h2>
           <div className="products-grid">
             {productsByCategory[category].map((product) => (
-              <div key={product._id} className="product-card">
+              <div key={product._id} className="product-card" onClick={() => handleProductClick(product._id)}>
                 <img
                   src={product.images.length > 0 ? product.images[imageIndexes[product._id]] : '/default-image.jpg'} 
                   alt={product.title}
@@ -90,4 +69,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Product;

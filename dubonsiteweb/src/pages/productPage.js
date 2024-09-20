@@ -5,28 +5,58 @@ import '../styles/pages/productPage.css';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import BeforeFooter from '../components/BeforeFooter';
+import logo from '../assets/favicon.png';  // Image par défaut
 
-const ProductPage = () => {
+const ProductPage = ({ addToCart }) => {
     const { productId } = useParams();  // Pour obtenir l'ID du produit depuis l'URL
-    const [product, setProduct] = useState({});
+    const [product, setProduct] = useState(null);
+    const [quantity, setQuantity] = useState(1);  // Gérer la quantité sélectionnée par l'utilisateur
+    const [isLoading, setIsLoading] = useState(true);  // Indicateur de chargement
 
     useEffect(() => {
         // Charger les données du produit via API
         const fetchProduct = async () => {
-            const { data } = await axios.get(`/api/products/${productId}`);
-            setProduct(data);
+            try {
+                const { data } = await axios.get(`http://localhost:5000/api/product/${productId}`);
+                setProduct(data);
+                setIsLoading(false);  // Arrêter le chargement
+            } catch (error) {
+                console.error("Erreur lors de la récupération des détails du produit :", error);
+                setIsLoading(false);  // Arrêter le chargement en cas d'erreur
+            }
         };
         fetchProduct();
     }, [productId]);
 
-    if (!product) return <div>Chargement...</div>;
+    if (isLoading) {
+        return <div>Chargement...</div>;  // Affichage pendant le chargement
+    }
+
+    if (!product) {
+        return <div>Produit introuvable.</div>;  // Cas où le produit n'existe pas
+    }
+
+    // Fonction pour gérer l'ajout au panier
+    const handleAddToCart = () => {
+        const productToAdd = {
+            ...product,
+            quantity,  // Ajouter la quantité sélectionnée
+        };
+        addToCart(productToAdd);  // Ajouter le produit au panier via la fonction prop `addToCart`
+        alert(`${product.name} ajouté au panier!`);
+    };
 
     return (
         <div className="product-page">
-            <NavBar/>
+            <NavBar />
+
             {/* En-tête produit (image et titre) */}
             <div className="product-header">
-                <img src={product.image} alt={product.name} className="product-image" />
+                <img 
+                    src={product.images && product.images.length > 0 ? product.images[0] : logo} 
+                    alt={product.name} 
+                    className="product-image" 
+                />
                 <div className="product-details">
                     <h1>{product.name}</h1>
                     <p>{product.description}</p>
@@ -34,25 +64,34 @@ const ProductPage = () => {
                 </div>
             </div>
 
-            {/* Prix et ajout au panier */}
+            {/* Prix, quantité et ajout au panier */}
             <div className="product-price">
                 {product.discount ? (
                     <>
-                        <span className="price-discount">GH₵ {product.discountedPrice}</span>
-                        <span className="price-original">GH₵ {product.price}</span>
-                        <span className="price-percentage">-{product.discountPercentage}%</span>
+                        <span className="price-discount">{product.discountedPrice} FCFA</span>
+                        <span className="price-original">{product.price} FCFA</span>
+                        <span className="price-percentage">-{product.discount}%</span>
                     </>
                 ) : (
-                    <span className="price">GH₵ {product.price}</span>
+                    <span className="price">{product.price} FCFA</span>
                 )}
-                <button className="add-to-cart-btn">Ajouter au panier</button>
+                <div className="quantity-selector">
+                    <label>Quantité:</label>
+                    <input 
+                        type="number" 
+                        value={quantity} 
+                        min="1" 
+                        onChange={(e) => setQuantity(Number(e.target.value))}  // Convertir la valeur en nombre
+                    />
+                </div>
+                <button className="add-to-cart-btn" onClick={handleAddToCart}>Ajouter au panier</button>
             </div>
 
             {/* Détails du produit */}
             <div className="product-details-section">
-                <h2>Product Details</h2>
+                <h2>Détails du produit</h2>
                 <p>{product.longDescription}</p>
-                <h3>Specifications</h3>
+                <h3>Spécifications</h3>
                 <ul>
                     {product.specifications && product.specifications.map((spec, index) => (
                         <li key={index}>{spec}</li>
@@ -73,11 +112,12 @@ const ProductPage = () => {
 
             {/* Section Questions */}
             <div className="product-questions">
-                <h3>Questions about this product?</h3>
+                <h3>Questions à propos de ce produit?</h3>
                 <button className="chat-btn">Chat</button>
             </div>
-            <BeforeFooter/>
-            <Footer/>
+
+            <BeforeFooter />
+            <Footer />
         </div>
     );
 };

@@ -1,81 +1,124 @@
 import React, { useState } from 'react';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faUser, faGlobe, faEnvelope, faClipboard } from '@fortawesome/free-solid-svg-icons';
-import '../styles/components/TopBar.css'
+import {TextField, Menu, MenuItem, IconButton, Button, Select, MenuList } from '@mui/material';
+import { AccountCircle, ShoppingCart, Language, ChatBubble, } from '@mui/icons-material';
+import '../styles/components/TopBar.css';
+import logo from '../assets/logo.png'
 
 const TopBar = () => {
-  const [language, setLanguage] = useState('FR');
-  const [currency, setCurrency] = useState('Dollar');
-  const [address, setAddress] = useState('');
-  
+  // const [anchorEl, setAnchorEl] = useState(null);
+  const [profileOpen, setProfileOpen] = useState(null);
+  const [messageOpen, setMessageOpen] = useState(null);
+  const [languageOpen, setLanguageOpen] = useState(null);
+  const [deliveryOpen, setDeliveryOpen] = useState(null);
+
+  // Handlers for dropdowns
+  // const handleMenuClick = (event) => setAnchorEl(event.currentTarget);
+  const handleProfileClick = (event) => setProfileOpen(event.currentTarget);
+  const handleMessageClick = (event) => setMessageOpen(event.currentTarget);
+  const handleLanguageClick = (event) => setLanguageOpen(event.currentTarget);
+  const handleDeliveryClick = (event) => setDeliveryOpen(event.currentTarget);
+
+  const handleClose = () => {
+    // setAnchorEl(null);
+    setProfileOpen(null);
+    setMessageOpen(null);
+    setLanguageOpen(null);
+    setDeliveryOpen(null);
+  };
+
   return (
     <div className="top-bar">
-      {/* Logo */}
       <div className="logo">
-        <a href="/">DUBON Service</a>
+        <img src={logo} alt="Dubon Service" />
       </div>
-      
-      {/* Recherche avec menu déroulant */}
+
       <div className="search-bar">
-        <DropdownButton title="Fabricants">
-          <Dropdown.Item>Produits</Dropdown.Item>
-          <Dropdown.Item>Service</Dropdown.Item>
-          <Dropdown.Item>Événementiel</Dropdown.Item>
-          <Dropdown.Item>Import & Export</Dropdown.Item>
-          <Dropdown.Item>E-Restaurant</Dropdown.Item>
-        </DropdownButton>
-        <input type="text" placeholder="Trouvez des fabricants ici" />
-        <button>Rechercher</button>
+        <Select
+          defaultValue="Produits"
+          className="dropdown"
+          displayEmpty
+        >
+          <MenuItem value="Produits">Produits</MenuItem>
+          <MenuItem value="Service">Service</MenuItem>
+          <MenuItem value="Evenementiel">Evenementiel</MenuItem>
+          <MenuItem value="Import & Export">Import & Export</MenuItem>
+          <MenuItem value="E-Restaurant">E-Restaurant</MenuItem>
+        </Select>
+        <input type="text" placeholder="Trouvez des produits ici" className="search-input" />
+        <Button className="search-button">Rechercher</Button>
       </div>
-
-      {/* Menu déroulant pour la langue et la devise */}
-      <div className="lang-currency">
-        <DropdownButton title={<FontAwesomeIcon icon={faGlobe} />}>
-          <Dropdown.Item onClick={() => setLanguage('FR')}>Français</Dropdown.Item>
-          <Dropdown.Item onClick={() => setLanguage('EN')}>English</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item onClick={() => setCurrency('Dollar')}>Dollar</Dropdown.Item>
-          <Dropdown.Item onClick={() => setCurrency('FCFA')}>Franc CFA</Dropdown.Item>
-        </DropdownButton>
-        <span>Livrer à :</span>
-        <DropdownButton title={<img src="/path-to-flag-icon.png" alt="Flag" />}>
-          <div className="address-dropdown">
-            <input 
-              type="text" 
-              placeholder="Entrez votre adresse" 
-              value={address} 
-              onChange={(e) => setAddress(e.target.value)} 
-            />
-            <button onClick={() => alert('Adresse sauvegardée !')}>Sauvegarder</button>
-          </div>
-        </DropdownButton>
-      </div>
-
-      {/* Icones pour Messages, Profil, Commandes */}
+      <div className="delivery" onClick={handleDeliveryClick}>
+      <i className="fas fa-map-marker-alt" style={{ marginRight: '4px' }}></i>
+          <span>Livrer à</span> <img src="togo-flag.png" alt="Togo Flag" />
+        </div>
+        <Menu
+          anchorEl={deliveryOpen}
+          open={Boolean(deliveryOpen)}
+          onClose={handleClose}
+        >
+          <MenuList>
+            <MenuItem>
+              <TextField fullWidth label="Adresse de livraison" />
+            </MenuItem>
+            <MenuItem>
+              <Button variant="contained">Sauvegarder</Button>
+            </MenuItem>
+          </MenuList>
+        </Menu>
       <div className="icons">
-        <DropdownButton title={<FontAwesomeIcon icon={faEnvelope} />}>
-          <Dropdown.Item>Messages</Dropdown.Item>
-          <Dropdown.Item>Notifications</Dropdown.Item>
-        </DropdownButton>
+        <IconButton onClick={handleLanguageClick}>
+          <Language />
+        </IconButton>
+        <Menu
+          anchorEl={languageOpen}
+          open={Boolean(languageOpen)}
+          onClose={handleClose}
+        >
+          <MenuList>
+            <MenuItem>Français</MenuItem>
+            <MenuItem>English</MenuItem>
+            <MenuItem>Dollar</MenuItem>
+            <MenuItem>Franc CFA</MenuItem>
+          </MenuList>
+        </Menu>
 
-        <DropdownButton title={<FontAwesomeIcon icon={faClipboard} />}>
-          <Dropdown.Item>Mes Commandes</Dropdown.Item>
-        </DropdownButton>
+        <IconButton onClick={handleMessageClick}>
+          <ChatBubble />
+        </IconButton>
+        <Menu
+          anchorEl={messageOpen}
+          open={Boolean(messageOpen)}
+          onClose={handleClose}
+        >
+          <MenuList>
+            <MenuItem>Notifications</MenuItem>
+            <MenuItem>Messages</MenuItem>
+          </MenuList>
+        </Menu>
 
-        <DropdownButton title={<FontAwesomeIcon icon={faUser} />}>
-          <Dropdown.Item>Bonjour, David</Dropdown.Item>
-          <Dropdown.Item>My DUBON</Dropdown.Item>
-          <Dropdown.Item>Commandes</Dropdown.Item>
-          <Dropdown.Item>Messages</Dropdown.Item>
-          <Dropdown.Item>Mes Devis</Dropdown.Item>
-          <Dropdown.Item>Favoris</Dropdown.Item>
-          <Dropdown.Item>Compte</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item>Déconnexion</Dropdown.Item>
-        </DropdownButton>
-        
-        <FontAwesomeIcon icon={faShoppingCart} />
+        <IconButton>
+          <ShoppingCart />
+        </IconButton>
+
+        <IconButton onClick={handleProfileClick}>
+          <AccountCircle />
+        </IconButton>
+        <Menu
+          anchorEl={profileOpen}
+          open={Boolean(profileOpen)}
+          onClose={handleClose}
+        >
+          <MenuList>
+            <MenuItem>Bonjour, David</MenuItem>
+            <MenuItem>My DUBON</MenuItem>
+            <MenuItem>Commandes</MenuItem>
+            <MenuItem>Messages</MenuItem>
+            <MenuItem>Mes Devis</MenuItem>
+            <MenuItem>Favoris</MenuItem>
+            <MenuItem>Compte</MenuItem>
+            <MenuItem>Déconnexion</MenuItem>
+          </MenuList>
+        </Menu>
       </div>
     </div>
   );

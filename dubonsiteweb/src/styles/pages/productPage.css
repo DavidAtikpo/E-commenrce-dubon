@@ -8,10 +8,12 @@
 }
 
 .product-image {
-    width: 300px;
-    height: 300px;
-    margin-right: 20px;
+    width: 100%;
+    max-width: 400px;  /* Taille max pour l'image */
+    height: auto;      /* Pour garder le ratio d'image */
+    display: block;    /* Assurez que l'image s'affiche en tant que bloc */
 }
+
 
 .product-details {
     flex: 1;

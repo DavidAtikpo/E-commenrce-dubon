@@ -1,12 +1,19 @@
+import { useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Button, TextField, Box, Typography } from '@mui/material';
 import logo from '../../assets/logo.png'; // Assurez-vous que le chemin vers l'image est correct
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Pou
 
 const ResetPasswordPage = () => {
+  const location = useLocation();
+  const email = location.state?.email || ''; // Récupérer l'email depuis l'état passé par la page précédente
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,10 +23,28 @@ const ResetPasswordPage = () => {
       return;
     }
 
-    // Logique pour réinitialiser le mot de passe ici...
-    // Par exemple, faire une requête POST vers le backend
+    try {
+      setLoading(true);
 
-    setMessage("Votre mot de passe a été réinitialisé avec succès.");
+      // Envoyer la requête avec l'email récupéré
+      const response = await axios.put('http://localhost:5000/api/user/reset-password', {
+        email, // Utilisation de l'email récupéré
+        password,
+      });
+
+      if (response.data.success) {
+        setMessage("Votre mot de passe a été réinitialisé avec succès.");
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+      } else {
+        setMessage(response.data.message || "Une erreur est survenue. Veuillez réessayer.");
+      }
+    } catch (error) {
+      setMessage("Une erreur est survenue. Veuillez réessayer.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -43,7 +68,7 @@ const ResetPasswordPage = () => {
           borderRadius: '8px'
         }}
       >
-        <Typography variant="h4" gutterBottom textAlign="center">
+        <Typography variant="h6" gutterBottom textAlign="center">
           <img src={logo} alt="logo" style={{ width: '130px', marginRight: '10px', verticalAlign: 'middle' }} />
           Réinitialisez votre mot de passe
         </Typography>
@@ -69,7 +94,7 @@ const ResetPasswordPage = () => {
         />
 
         {message && (
-          <Typography variant="body2" color="error" gutterBottom>
+          <Typography variant="body2" color={message.includes('succès') ? 'success' : 'error'} gutterBottom>
             {message}
           </Typography>
         )}
@@ -80,8 +105,9 @@ const ResetPasswordPage = () => {
           color="primary"
           sx={{ marginTop: '16px', backgroundColor: '#f60' }}
           onClick={handleSubmit}
+          disabled={loading}
         >
-          Réinitialiser le mot de passe
+          {loading ? 'Chargement...' : 'Réinitialiser le mot de passe'}
         </Button>
 
         <Box textAlign="center" mt={2}>

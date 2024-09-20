@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
 import { Button, TextField, Box, Typography } from '@mui/material';
 import logo from '../../assets/logo.png'; // Assurez-vous que le chemin vers l'image est correct
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState(''); // Pour gérer les erreurs
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Logique pour envoyer l'e-mail de réinitialisation de mot de passe ici...
-    // Par exemple, faire une requête POST vers le backend avec l'email
+    try {
+      const response = await axios.post('http://localhost:5000/api/user/forgot-password', {
+        email,
+      });
 
-    setMessage("Un lien de réinitialisation de mot de passe a été envoyé à votre adresse e-mail.");
+      if (response.status === 200 || response.status === 201) {
+        setMessage('Un lien a été envoyé à votre email.');
+        navigate('/verification-code', { state: { email } }); 
+        setError(''); // Réinitialiser l'erreur en cas de succès
+      }
+    } catch (error) {
+      console.error(error);
+      setError('Une erreur est survenue. Veuillez réessayer.'); // Gérer l'erreur
+      setMessage(''); // Réinitialiser le message en cas d'erreur
+    }
   };
 
   return (
@@ -37,7 +51,7 @@ const ForgotPasswordPage = () => {
           borderRadius: '8px'
         }}
       >
-        <Typography variant="h4" gutterBottom textAlign="center">
+        <Typography variant="h6" gutterBottom textAlign="center">
           <img src={logo} alt="logo" style={{ width: '130px', marginRight: '10px', verticalAlign: 'middle' }} />
           Mot de passe oublié
         </Typography>
@@ -55,6 +69,12 @@ const ForgotPasswordPage = () => {
         {message && (
           <Typography variant="body2" color="success" gutterBottom>
             {message}
+          </Typography>
+        )}
+
+        {error && (
+          <Typography variant="body2" color="error" gutterBottom>
+            {error}
           </Typography>
         )}
 
