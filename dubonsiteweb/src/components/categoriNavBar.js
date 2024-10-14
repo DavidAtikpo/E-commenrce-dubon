@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Menu, MenuItem, Tab, Tabs, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Box, Button, Menu, MenuItem, Tab, Tabs } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import axios from 'axios';
 import { API_URL } from '../config';
@@ -8,7 +8,7 @@ import './categorieNavBar.css'
 
 const CategoryNavigationBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [categories, setCategories] = useState([]);
+  const [ setCategories] = useState([]);
   const [moreCategories, setMoreCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedTab, setSelectedTab] = useState(0);
@@ -44,7 +44,7 @@ const CategoryNavigationBar = () => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  });
 
   const handleCategorie = (categorieName) => {
     Navigate(`/category/${categorieName}`);

@@ -9,7 +9,7 @@ import MessagesComponent from './MessagesComponent';
 import AchatProspectsComponent from './AchatProspectsComponent';
 import UserOrders from '../MonCompte/UserOrder';
 import TransactionCenterComponent from '../MonCompte/TransactionHistoryComponent';
-import ContactsComponent from './ContactsComponent';
+// import ContactsComponent from './ContactsComponent';
 import MesListesComponent from './MesListesComponent';
 import ServicesComponent from './ServicesComponent';
 import VendeurSelection from '../../pages/vendeurs/vendeurSelection';

@@ -1,6 +1,8 @@
 import React from 'react';
 import ProductPage from './pages/productPage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+
 import Home from './pages/Home';
 // import Products from './pages/Products';
 import LoginPage from './pages/auth/LoginPage';
@@ -49,6 +51,7 @@ function App() {
         {/* Define the Routes for different pages */}
         <ErrorBoundary>
         <Routes>
+        <Route path="/" element={<Home/>}/>
         <Route path="/vendeur/dashboard" element={<VendeurDashboard/>} />
         <Route path="/vendeur/produits/ajouter" element={<AjouterProduit/>} />
         <Route path="/vendeur/produits" element={<MesProduits/>} />
@@ -61,7 +64,7 @@ function App() {
 
 
 
-          <Route path="/" element={<Home />} />
+         
           {/* <Route path="/" element={<UserDashboardLayout />} /> */}
          
           <Route path="/productPage/:productId" element={<ProductPage />} />

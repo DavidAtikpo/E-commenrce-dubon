@@ -9,7 +9,7 @@ const PasswordUpdateComponent = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [step, setStep] = useState(0);
-  const [serverMessage, setServerMessage] = useState('');
+  const [serverMessage] = useState('');
 
   // Soumettre le nouveau mot de passe au backend
   const handlePasswordChange = async () => {

@@ -1,18 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  isAuthenticated: false,
+  user: null,
+  loading: false,
+  error: null,
+};
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    user: {
-      profilePhoto: '', // Valeur par défaut
-    },
-  },
+  initialState,
   reducers: {
-    updateProfilePhoto: (state, action) => {
-      state.profilePhoto = action.payload; // Mettre à jour le chemin de la photo
+    loginRequest: (state) => {
+      state.loading = true;
+    },
+    loginSuccess: (state, action) => {
+      state.isAuthenticated = true;
+      state.loading = false;
+      state.user = action.payload;
+    },
+    loginFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    logout: (state) => {
+      state.isAuthenticated = false;
+      state.user = null;
     },
   },
 });
 
-export const { updateProfilePhoto } = authSlice.actions;
+export const { loginRequest, loginSuccess, loginFailure, logout } = authSlice.actions;
+
 export default authSlice.reducer;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faEnvelope, faShoppingCart, faClipboardList, faExchangeAlt, faAddressBook, faList, faCog,faSearchDollar } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faEnvelope, faShoppingCart, faClipboardList, faExchangeAlt, faList, faCog,faSearchDollar } from '@fortawesome/free-solid-svg-icons';
 import './MessageSideBar.css'; // Import du fichier CSS
 
 
