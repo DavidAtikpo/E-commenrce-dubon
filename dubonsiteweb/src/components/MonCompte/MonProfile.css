@@ -1,0 +1,33 @@
+.user-profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .user-profile-paper {
+    padding: 20px;
+  }
+  
+  .user-profile-avatar-container {
+    text-align: center;
+  }
+  
+  .user-profile-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+  }
+  
+  .user-profile-favorites-title {
+    margin-top: 20px;
+  }
+  
+  .user-profile-favorites-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-profile-favorites-list li {
+    margin-bottom: 8px;
+  }
+  

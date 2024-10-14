@@ -1,0 +1,57 @@
+.search-bar {
+    display: flex;
+    /* align-items: center; */
+   /* margin-right: 300px; */
+  }
+  
+  .search-label {
+    margin-right: 10px; /* Espace entre 'Recherche' et l'input */
+    font-weight: bold;
+  }
+  
+  .search-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+  }
+  
+  /* .search-button {
+    margin-left: 5px;
+    padding: 6px 7px;
+    font-size: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  } */
+  
+  .search-button:hover {
+    background-color: darkblue;
+  }
+  
+  /* Mobile format: recherche en bas de l'input */
+  @media (max-width: 768px) {
+    .search-bar {
+      flex-direction: column; /* Empile l'étiquette, l'input et le bouton */
+      align-items: flex-start; /* Aligne à gauche */
+      width: 100%; /* Prend toute la largeur */
+    }
+  
+    .search-label {
+      margin-right: 0;
+      margin-bottom: 8px; /* Ajoute un espace entre l'étiquette et l'input */
+    }
+  
+    .search-input {
+      width: 100%; /* L'input prend toute la largeur */
+      margin-bottom: 10px; /* Espace entre l'input et le bouton */
+    }
+  
+    .search-button {
+      margin-left: 0; /* Supprime l'espace à gauche */
+      width: 100%; /* Le bouton prend aussi toute la largeur */
+    }
+  }
+  

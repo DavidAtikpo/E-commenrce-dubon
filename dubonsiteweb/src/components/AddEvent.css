@@ -1,0 +1,136 @@
+/* AddEvent.css */
+
+.form-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container input[type="file"] {
+    margin-top: 10px;
+    display: block;
+  }
+  
+  .preview-container {
+    margin-top: 20px;
+  }
+  
+  .preview-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .preview-item {
+    position: relative;
+    max-width: 200px;
+    max-height: 200px;
+  }
+  
+  .preview-item img,
+  .preview-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .preview-item .remove-button {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .preview-item .remove-button:hover {
+    background-color: rgba(255, 0, 0, 1);
+  }
+  
+  .event-list {
+    margin-top: 40px;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  .event-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-list li .event-info {
+    flex-grow: 1;
+    margin-left: 10px;
+  }
+  
+  .event-list li .event-info h5 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .event-list li .event-info p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .event-list li .event-media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .event-list li .event-media img,
+  .event-list li .event-media video {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+  }
+  
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  .button-secondary {
+    background-color: #dc3545;
+  }
+  
+  .button-secondary:hover {
+    background-color: #c82333;
+  }
+  
+  .message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  

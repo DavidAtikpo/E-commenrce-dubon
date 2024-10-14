@@ -1,0 +1,93 @@
+/* Conteneur principal de la page d'adresse de livraison */
+.shipping-address-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  background-color: #f9f9f9;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre principal */
+.shipping-address-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Sous-titre avec information sur la confidentialité */
+.shipping-address-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+/* Champs de formulaire */
+.shipping-address-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Conteneur pour les champs de texte (Nom et téléphone) */
+.shipping-address-row {
+  display: flex;
+  gap: 16px;
+}
+
+/* Adresse complète avec autocomplétion */
+.shipping-address-autocomplete {
+  margin-top: 16px;
+  width: 100%;
+}
+
+/* Conteneur pour les champs Ville, État et Code Postal */
+.shipping-address-location-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Checkbox pour géolocalisation et termes */
+.shipping-address-checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* Message d'erreur */
+.shipping-address-error {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Bouton pour continuer au paiement */
+.shipping-address-button {
+  margin-top: 24px;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.shipping-address-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style des champs Material UI (personnalisation si nécessaire) */
+.MuiTextField-root {
+  width: 100%;
+}
+
+.MuiFormControl-root {
+  width: 100%;
+}

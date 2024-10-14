@@ -1,67 +1,133 @@
 /* Conteneur de la Sidebar */
 .sidebar-container {
-    position: relative;
-    background-color: #f4f4f4;
-    height: 100%;
-    width: 240px;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid #ddd;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background-color: #0808cd;
+  height: 100%;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Ajouté pour permettre le défilement vertical */
+}
+
+/* List items dans la Sidebar */
+.sidebar-container .list-item {
+  padding: 15px;
+  color: #fcfbfb;
+}
+
+.sidebar-container .list-item-icon {
+  color: #666;
+}
+
+/* Couleur au survol */
+.sidebar-container .list-item:hover {
+  /* background-color: #e0e0e0; */
+}
+
+/* Sous-menu pour les produits */
+.sidebar-container .collapse .list-item {
+  padding-left: 40px;
+}
+
+/* Sélection active */
+.sidebar-container .list-item.selected {
+  background-color: #1976d2;
+  color: white;
+}
+
+.sidebar-container .list-item.selected:hover {
+  background-color: #115293;
+}
+
+/* Icônes */
+.sidebar-container .list-item-icon {
+  min-width: 40px;
+}
+
+/* Texte dans la sidebar */
+.sidebar-container .list-item-text {
+  font-weight: 500;
+}
+/* Supprimer les puces de toutes les listes */
+ul {
+  list-style-type: none; /* Enlève les points */
+  padding-left: 0; /* Enlève l'espace par défaut à gauche */
+}
+
+/* Pour le style des éléments de liste */
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.collapse {
+  padding-left: 0; /* Pas de décalage à gauche */
+}
+
+.collapse .list-item {
+  padding-left: 20px; /* Légèrement décalé pour les sous-menus */
+  text-align: left; /* Alignement à gauche des sous-menus */
+}
+.collapse {
+  padding-left: 20px; /* Décalage pour sous-menus si besoin */
+}
+
+/* Ajustement pour les petits écrans */
+@media (max-width: 600px) {
+  .sidebar-container {
+    width: 200px;
   }
-  
-  /* List items dans la Sidebar */
-  .sidebar-container .MuiListItem-button {
-    padding: 15px;
-    color: #333;
+
+  .sidebar-container .list-item-text {
+    font-size: 14px;
   }
-  
-  .sidebar-container .MuiListItemIcon-root {
-    color: #666;
+
+  .sidebar-container .list-item-icon {
+    min-width: 30px;
   }
-  
-  /* Couleur au survol */
-  .sidebar-container .MuiListItem-button:hover {
-    background-color: #e0e0e0;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #000;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.drawer {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: fixed;
+  top: 64px; /* Ajustez selon vos besoins */
+  left: 0;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  overflow-y: auto; /* Ajouté pour permettre le défilement vertical */
+}
+
+.drawer.open {
+  width: 240px; /* Ajustez selon vos besoins */
+}
+
+@media (max-width: 600px) {
+  .drawer {
+    display: none;
   }
-  
-  /* Sous-menu pour les produits */
-  .sidebar-container .MuiCollapse-root .MuiListItem-button {
-    padding-left: 40px;
-  }
-  
-  /* Sélection active */
-  .sidebar-container .MuiListItem-button.Mui-selected {
-    background-color: #1976d2;
-    color: white;
-  }
-  
-  .sidebar-container .MuiListItem-button.Mui-selected:hover {
-    background-color: #115293;
-  }
-  
-  /* Icônes */
-  .sidebar-container .MuiListItemIcon-root {
-    min-width: 40px;
-  }
-  
-  /* Texte dans la sidebar */
-  .sidebar-container .MuiListItemText-primary {
-    font-weight: 500;
-  }
-  
-  /* Ajustement pour les petits écrans */
-  @media (max-width: 600px) {
-    .sidebar-container {
-      width: 200px;
-    }
-    
-    .sidebar-container .MuiListItemText-primary {
-      font-size: 14px;
-    }
-    
-    .sidebar-container .MuiListItemIcon-root {
-      min-width: 30px;
-    }
-  }
-  
+}
+
+
+
+

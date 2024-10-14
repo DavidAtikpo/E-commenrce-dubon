@@ -1,0 +1,70 @@
+/* Styles pour le formulaire d'ajout de publicités */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style pour chaque champ du formulaire */
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  /* Labels pour les champs */
+  form label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  /* Champs de texte (input) */
+  form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  /* Bouton de soumission */
+  form button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* Effet hover sur le bouton */
+  form button[type="submit"]:hover {
+    background-color: #218838;
+  }
+  
+  /* Message de succès ou d'erreur */
+  form p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Style pour le message d'erreur */
+  form p.error {
+    color: #e74c3c;
+  }
+  
+  /* Style pour le message de succès */
+  form p.success {
+    color: #28a745;
+  }
+  

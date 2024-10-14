@@ -3,7 +3,7 @@ import userReducer from './userSlice'; // Assurez-vous que le chemin est correct
 
 const store = configureStore({
   reducer: {
-    user: userReducer,
+    name: userReducer,
   },
 });
 

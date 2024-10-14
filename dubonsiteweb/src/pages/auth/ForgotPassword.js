@@ -20,6 +20,7 @@ const ForgotPasswordPage = () => {
 
       if (response.status === 200 || response.status === 201) {
         setMessage('Un lien a été envoyé à votre email.');
+        localStorage.setItem("Email",email)
         navigate('/verification-code', { state: { email } }); 
         setError(''); // Réinitialiser l'erreur en cas de succès
       }

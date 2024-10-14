@@ -1,0 +1,46 @@
+.sidebar {
+  width: 250px;
+  background-color: #0808cd; /* Couleur bleue */
+  color: white;
+  padding: 20px;
+  height: 100vh; /* Pour occuper toute la hauteur */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar ul li:hover {
+  background-color: #0056b3;
+  padding-left: 10px;
+  transition: padding-left 0.3s ease-in-out;
+}
+
+.sidebar ul li .fa-icon {
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .sidebar ul {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .sidebar ul li {
+    margin-bottom: 0;
+  }
+}

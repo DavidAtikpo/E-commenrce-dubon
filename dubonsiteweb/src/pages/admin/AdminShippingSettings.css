@@ -1,0 +1,88 @@
+/* Conteneur principal */
+.admin-shipping-settings-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Titre */
+  .admin-shipping-settings-container h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Labels */
+  .admin-shipping-settings-container label {
+    display: block;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  /* Champs de saisie */
+  .admin-shipping-settings-container input,
+  .admin-shipping-settings-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  /* Styles spécifiques aux tarifs de distance */
+  .distance-rate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .distance-rate label {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .distance-rate input {
+    width: 80px;
+    flex-shrink: 0;
+  }
+  
+  /* Bouton Sauvegarder */
+  .admin-shipping-settings-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .admin-shipping-settings-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Adaptation pour les petits écrans */
+  @media (max-width: 600px) {
+    .admin-shipping-settings-container {
+      padding: 15px;
+    }
+  
+    .distance-rate label {
+      flex: 2;
+    }
+  
+    .distance-rate input {
+      width: 60px;
+    }
+  }
+  

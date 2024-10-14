@@ -1,0 +1,154 @@
+/* AccueilComponent.css */
+
+.accueil-container {
+  width: 100%;
+  margin: 0 auto;
+  /* padding: 20px; */
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.profile-picture {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.user-info h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.user-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item h4 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.stat-item p {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
+}
+
+.market-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.market-card {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.market-card:last-child {
+  margin-right: 0;
+}
+
+.market-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.market-card p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.market-card button {
+  background-color: #0808cd;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.orders-section {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.orders-section h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.orders-section p {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: #888;
+}
+
+.orders-section button {
+  background-color: #0808cd;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Responsiveness for mobile devices */
+@media (max-width: 768px) {
+  .user-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-info {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .user-stats {
+    flex-direction: column;
+  }
+
+  .market-section {
+    flex-direction: column;
+  }
+
+  .market-card {
+    margin-bottom: 20px;
+  }
+
+  .orders-section {
+    padding: 15px;
+  }
+}

@@ -1,0 +1,121 @@
+/* Container principal qui contient le bouton et la boîte */
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+}
+
+/* Bouton pour ouvrir/fermer le chat box */
+.chat-toggle-btn {
+  background-color: #0808cd;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Cacher le bouton lorsque la boîte de chat est ouverte */
+.chat-container.chat-open .chat-toggle-btn {
+  display: none;
+}
+
+/* Style de la boîte de chat */
+.chat-box {
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  box-sizing: border-box; /* Assure que les paddings/marges sont inclus dans la largeur */
+  overflow: hidden; /* Empêche le dépassement du contenu */
+}
+
+/* En-tête de la boîte */
+.chat-header {
+  background-color: #0808cd;
+  color: white;
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Bouton pour fermer le chat */
+.close-btn {
+  background: none;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Zone de messages */
+.chat-messages {
+  padding: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Formulaire de chat */
+.chat-form {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  box-sizing: border-box; /* Assure que le padding est pris en compte dans la largeur totale */
+}
+
+/* Corrige la largeur de l'input */
+.chat-form input {
+  flex-grow: 1; /* Prend tout l'espace disponible */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 5px;
+  width: 100%; /* S'assure que l'input reste à 100% de la largeur du conteneur */
+  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+/* Bouton d'envoi */
+.chat-form button {
+  background-color: #0808cd;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-shrink: 0; /* Empêche le bouton de se rétrécir */
+}
+/* Styles pour les écrans mobiles */
+@media (max-width: 480px) {
+  .chat-container {
+    bottom: 10px; /* Réduire l'espacement en bas sur mobile */
+    right: 10px;  /* Réduire l'espacement à droite sur mobile */
+  }
+
+  .chat-box {
+    width: 90vw; /* Utiliser 90% de la largeur de la vue sur mobile */
+    height: 80vh; /* Utiliser 80% de la hauteur de la vue sur mobile */
+  }
+
+  .chat-header h4 {
+    font-size: 18px; /* Ajuster la taille de la police pour mobile */
+  }
+
+  .chat-toggle-btn {
+    padding: 8px 12px; /* Réduire le padding sur mobile */
+    font-size: 14px; /* Ajuster la taille de la police pour mobile */
+  }
+}

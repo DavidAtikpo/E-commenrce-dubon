@@ -1,0 +1,51 @@
+.analytics-container {
+    padding: 20px;
+    background-color: #f8f8fa;
+  }
+  
+  .analytics-section {
+    /* display: flex; */
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .analytics-card {
+    background-color: rgb(202, 213, 241);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Assure que deux cartes peuvent être alignées côte à côte */
+    text-align: center;
+  }
+  
+  .analytics-card h2 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
+  
+  .analytics-card h3 {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .analytics-card p {
+    color: #666;
+  }
+  
+  .analytics-cards-container {
+    /* display: flex; */
+    justify-content: space-between;
+    gap: 10px; /* Ajout d'un écart entre les cartes */
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  /* Ajout pour les petites tailles d'écran */
+  @media (max-width: 768px) {
+    .analytics-card {
+      width: 100%; /* Les cartes s'empilent sur de petits écrans */
+      margin-bottom: 10px;
+    }
+  }
+  

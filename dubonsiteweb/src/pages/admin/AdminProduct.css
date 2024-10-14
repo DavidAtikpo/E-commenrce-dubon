@@ -1,0 +1,104 @@
+.product-management{
+
+}
+
+.search-bar {
+  margin-bottom: 15px;
+}
+th{
+    background-color: #007bff;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  /* border-radius: 1px; */
+  font-size: 10px;
+}
+.out-of-stock{
+    color: red;
+}
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.product-table th, .product-table td {
+  padding: 0px 15px;
+  /* border: 1px solid #ddd; */
+  text-align: left;
+}
+
+.dropdown {
+  position: relative;
+  background-color: #f1f1f1;
+}
+
+.dropdown button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 1;
+  background-color: rgb(208, 196, 196);
+  border: 1px solid #ddd;
+  padding: 10px;
+  /* font-size: 10px; */
+  z-index: 100;
+}
+.tp{
+    color: black;
+}
+.product-image{
+    height: 50px;
+    width: 50px;
+}
+.dropdown-menu button {
+  display: block;
+  background: none;
+  border: none;
+  padding: 5px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-menu .delete-button {
+  color: red;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f1f1f1;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination button {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination button:hover {
+  background-color: #ddd;
+}

@@ -1,41 +1,140 @@
-/* Header.css */
+/* Style général du header */
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  margin-top: 15px;
+  top: 0;
+  width: 100%;
+  height: 20px;
+  z-index: 1000;
+  box-shadow: 0px 3px 3px rgba(3, 3, 3, 3.2);
+  /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2); */
+}
 
-.header-appbar {
-  background-color: white;
+/* Partie gauche du header (logo et badge) */
+.header-left {
+  display: flex;
+  align-items: center;
+  background-color: #ea8f4f; /* Fond sombre pour le logo et ADMIN */
+  padding: 25px 20px;
+  /* box-shadow: 0px 3px 3px rgba(3, 3, 3, 3.2); */
+  width: 240px; /* Ajustez la largeur selon vos besoins */
 }
 
 .header-logo {
-  max-width: 60px; /* Ajuste selon la taille de ton logo */
-  margin-left: 50px
+  height: 40px;
+  width: 40px;
+}
+
+.admin-badge {
+  background-color: yellow;
+  color: black;
+  padding: 4px 10px;
+  margin-left: 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Partie droite du header (menu, search, profil, etc.) */
+.header-right {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa; /* Fond clair pour le reste */
+  flex-grow: 1;
+  padding: 12.5px 20px;
+  box-shadow: 0px 1px 1px rgba(250, 3, 3, 3.2);
+}
+
+.menu-button {
+  font-size: 24px;
+  /* background: none; */
+  height: 40px;
+  width: 40px;
+  color: black;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  gap: 20px;
 }
 
 .header-search {
   display: flex;
-  align-items: center;
-  background-color: #f1f3f4;
+  flex-grow: 1;
+  margin-right: 20px;
+  background-color: #e9ecef;
   padding: 5px;
   border-radius: 4px;
 }
 
-.header-search input {
-  margin-left: 8px;
+.search-icon {
+  margin-right: 10px;
+  color: #999;
+}
+
+.search-input {
   border: none;
   outline: none;
+  background: none;
+  width: 100%;
+}
+
+/* Icones (langue et notifications) */
+.header-icons {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.lang-flag {
+  font-size: 24px;
+  margin-right: 20px;
 }
 
 .header-icon {
-  margin-left: 16px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
 }
 
-/* Styles pour mobile */
-@media (max-width: 600px) {
-  .header-search {
-    flex-grow: 1;
-  }
+.badge {
+  position: absolute;
+  top: 0px;
+  right: 15px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 10px;
+}
 
-  .header-logo {
-    display: flex;
-    justify-content: center;
-    width: auto;
-  }
+/* Profil utilisateur */
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+.user-email {
+  font-size: 12px;
+  color: gray;
 }

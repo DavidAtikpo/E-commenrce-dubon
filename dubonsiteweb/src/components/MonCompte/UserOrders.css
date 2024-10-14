@@ -1,0 +1,19 @@
+.user-orders-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .user-orders-title {
+    margin-bottom: 20px;
+  }
+  
+  .user-orders-table {
+    margin-top: 20px;
+  }
+  
+  .loading-spinner {
+    display: block;
+    margin: 40px auto;
+  }
+  

@@ -11,7 +11,7 @@ import axios from 'axios'; // Assurez-vous d'avoir installé axios: npm install 
 const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [mobile, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -26,7 +26,7 @@ const RegisterPage = () => {
       const response = await axios.post('http://localhost:5000/api/user/register', {
         name,
         email,
-        phoneNumber,
+        mobile,
         password,
       });
       
@@ -100,7 +100,7 @@ const RegisterPage = () => {
 
         <PhoneInput
           country={'tg'}
-          value={phoneNumber}
+          value={mobile}
           onChange={(phone) => setPhoneNumber(phone)}
           inputStyle={{
             width: '100%',

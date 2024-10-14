@@ -1,14 +1,10 @@
-import { useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Button, TextField, Box, Typography } from '@mui/material';
 import logo from '../../assets/logo.png'; // Assurez-vous que le chemin vers l'image est correct
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Pou
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ResetPasswordPage = () => {
-  const location = useLocation();
-  const email = location.state?.email || ''; // Récupérer l'email depuis l'état passé par la page précédente
-
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -23,9 +19,16 @@ const ResetPasswordPage = () => {
       return;
     }
 
+    // Récupérer l'email depuis le localStorage
+    const email = localStorage.getItem('Email');
+    
+    if (!email) {
+      setMessage("Aucun email trouvé. Veuillez réessayer.");
+      return;
+    }
+
     try {
       setLoading(true);
-
       // Envoyer la requête avec l'email récupéré
       const response = await axios.put('http://localhost:5000/api/user/reset-password', {
         email, // Utilisation de l'email récupéré
@@ -34,6 +37,7 @@ const ResetPasswordPage = () => {
 
       if (response.data.success) {
         setMessage("Votre mot de passe a été réinitialisé avec succès.");
+        localStorage.removeItem('Email')
         setTimeout(() => {
           navigate('/login');
         }, 2000);
@@ -49,76 +53,45 @@ const ResetPasswordPage = () => {
 
   return (
     <Box
-      sx={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#f0f0f0',
-        padding: '20px'
-      }}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      height="100vh"
     >
-      <Box
-        sx={{
-          maxWidth: '450px',
-          width: '100%',
-          padding: '20px',
-          backgroundColor: 'white',
-          boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
-          borderRadius: '8px'
-        }}
-      >
-        <Typography variant="h6" gutterBottom textAlign="center">
-          <img src={logo} alt="logo" style={{ width: '130px', marginRight: '10px', verticalAlign: 'middle' }} />
-          Réinitialisez votre mot de passe
-        </Typography>
-
+      <img src={logo} alt="Logo" style={{ width: 100, marginBottom: 20 }} />
+      <Typography variant="h5" gutterBottom>Réinitialiser le mot de passe</Typography>
+      <form onSubmit={handleSubmit}>
         <TextField
-          fullWidth
           label="Nouveau mot de passe"
-          variant="outlined"
-          margin="normal"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <TextField
+          required
           fullWidth
-          label="Confirmer le mot de passe"
-          variant="outlined"
           margin="normal"
+        />
+        <TextField
+          label="Confirmer le mot de passe"
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-
-        {message && (
-          <Typography variant="body2" color={message.includes('succès') ? 'success' : 'error'} gutterBottom>
-            {message}
-          </Typography>
-        )}
-
-        <Button
+          required
           fullWidth
+          margin="normal"
+        />
+        {message && <Typography color="error">{message}</Typography>}
+        <Button
+          type="submit"
           variant="contained"
           color="primary"
-          sx={{ marginTop: '16px', backgroundColor: '#f60' }}
-          onClick={handleSubmit}
+          fullWidth
           disabled={loading}
+          style={{ marginTop: 20 }}
         >
-          {loading ? 'Chargement...' : 'Réinitialiser le mot de passe'}
+          {loading ? "En cours..." : "Réinitialiser"}
         </Button>
-
-        <Box textAlign="center" mt={2}>
-          <Typography variant="body2">
-            <Link to={'/login'}>
-              Retourner à la page de 
-              <span style={{ cursor: 'pointer', color: '#f60' }}> connexion</span>
-            </Link>
-          </Typography>
-        </Box>
-      </Box>
+      </form>
     </Box>
   );
 };

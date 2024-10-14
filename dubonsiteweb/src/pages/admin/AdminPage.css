@@ -1,0 +1,34 @@
+/* AdminPage.css */
+.main-content {
+    flex-grow: 1;
+    margin-top: 1rem; 
+    /* background-color: #f4f6f8; */
+    /* padding: 20px; */
+    margin-left: 0px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    width: 100%;
+  }
+  
+  @media (max-width: 600px) {
+    .main-content {
+      margin-left: 0;
+    }
+  }
+  
+  .grid-container {
+    display: flex;
+    justify-content: right;
+    gap: 2rem; 
+  }
+  
+  .grid-item {
+    width: 100%;
+  }
+  
+  @media (min-width: 960px) {
+    .grid-item {
+      width: 66.6666%; /* 8 colonnes sur 12 (md=8) */
+    }
+  }
+  

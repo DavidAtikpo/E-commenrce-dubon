@@ -1,0 +1,17 @@
+/* Styles pour la bannière publicitaire */
+.ad-banner {
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  /* AdBanner.css */
+a img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  

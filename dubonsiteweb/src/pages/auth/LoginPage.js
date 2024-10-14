@@ -6,15 +6,16 @@ import 'react-phone-input-2/lib/style.css';
 import logo from '../../assets/logo.png';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Assurez-vous d'avoir installé axios: npm install axios
-
+import axios from 'axios';
+// import Cookies from 'js-cookie'; // Importer js-cookie pour la gestion des cookies
+import {API_URL} from '../../config.js'
 const LoginPage = () => {
-  const [usePhone, setUsePhone] = useState(false); // Bascule entre email et téléphone
-  const [phoneNumber, setPhoneNumber] = useState(''); // Stocke le numéro de téléphone
-  const [email, setEmail] = useState(''); // Stocke l'email
-  const [password, setPassword] = useState(''); // Stocke le mot de passe
-  const [loading, setLoading] = useState(false); // Gérer l'état du chargement
-  const [errorMessage, setErrorMessage] = useState(''); // Gérer les erreurs
+  const [usePhone, setUsePhone] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   // Fonction pour gérer la soumission du formulaire
@@ -25,13 +26,19 @@ const LoginPage = () => {
     const credentials = usePhone ? { phoneNumber, password } : { email, password };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/user/login', credentials);
-      
-      // Si la réponse est positive, rediriger l'utilisateur ou enregistrer le token
+      const response = await axios.post(`${API_URL}/api/user/login`, credentials);
+
+      // Si la réponse est positive, enregistrer le token dans un cookie sécurisé
       if (response.status === 200) {
         const token = response.data.token;
-        localStorage.setItem('authToken', token); // Sauvegarder le token JWT
-        navigate('/user-dash'); // Rediriger l'utilisateur après la connexion
+        const name = response.data.name;
+        console.log('user',name);
+        
+        console.log("token",token);
+        // localStorage.setItem('token',token)
+        localStorage.setItem('token', token, { expires: 7, secure: true, sameSite: 'Strict' }); 
+        localStorage.setItem('name',name)
+        navigate('/');
       }
     } catch (error) {
       console.error('Erreur de connexion:', error);
@@ -41,9 +48,22 @@ const LoginPage = () => {
     }
   };
 
-  const handleGoogleLoginSuccess = (credentialResponse) => {
-    console.log(credentialResponse);
-    // Ici vous pouvez envoyer le token Google au backend pour validation
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    try {
+      const googleToken = credentialResponse.credential;
+      const response = await axios.post(`${API_URL}/api/user/google-login`, { token: googleToken });
+
+      if (response.status === 200) {
+        const token = response.data.token;
+        
+        localStorage.setItem('token', token, { expires: 7, secure: true, sameSite: 'Strict' }); // Sauvegarder le token JWT dans les cookies
+        
+        navigate('/'); // Redirection après succès
+      }
+    } catch (error) {
+      console.error('Google Login Failed:', error);
+      setErrorMessage('Erreur lors de la connexion avec Google.');
+    }
   };
 
   return (
@@ -88,20 +108,20 @@ const LoginPage = () => {
             onClick={() => setUsePhone(false)}
             sx={{ marginRight: '10px' }}
           >
-           <h5> Connexion avec email</h5>
+            <h5> Connexion avec email</h5>
           </Button>
           <Button
             variant={usePhone ? 'contained' : 'outlined'}
             onClick={() => setUsePhone(true)}
           >
-           <h5>Connexion avec téléphone</h5> 
+            <h5>Connexion avec téléphone</h5> 
           </Button>
         </Box>
 
         {/* Affichage du champ en fonction du mode sélectionné */}
         {usePhone ? (
           <PhoneInput
-            country={'tg'} // Définir le code par défaut sur Togo (+228)
+            country={'tg'}
             value={phoneNumber}
             onChange={(phone) => setPhoneNumber(phone)}
             inputStyle={{

@@ -1,0 +1,48 @@
+.profile{
+  width: 10px;
+  height: 10px;
+}
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
+  }
+
+  .custom-topbar-icons {
+    display: none;
+  }
+
+  .custom-logo {
+    margin-left: -10px;
+  }
+
+  .search {
+    margin-top: 60px;
+    font-size: 12px;
+  }
+
+  .login-btn {
+    width: 80px;
+    font-size: 12px;
+  }
+
+  .search input {
+    width: 80%;
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+/* Correctement aligner les icônes avec flexbox */
+.custom-topbar-icons .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.custom-topbar-icons .icon img {
+  width: 24px;
+  height: 24px;
+}

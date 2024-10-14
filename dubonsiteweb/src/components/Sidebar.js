@@ -1,229 +1,120 @@
-// import React from 'react';
-// import { Drawer, List, ListItem, ListItemIcon, ListItemText, Collapse, Toolbar } from '@mui/material';
-// import { Home, ExpandLess, ExpandMore, ShoppingBag, CalendarToday, ListAlt, TableChart } from '@mui/icons-material';
-
-// const drawerWidth = 240;
-
-// const Sidebar = ({ onMenuClick, mobileOpen, handleDrawerToggle, isMobile }) => {
-//   const [openProduct, setOpenProduct] = React.useState(false); // Gérer l'ouverture/fermeture du sous-menu "Product"
-
-//   const handleClick = () => {
-//     setOpenProduct(!openProduct); // Ouvrir ou fermer le sous-menu
-//   };
-
-//   const drawerContent = (
-//     <div>
-//       <Toolbar />
-//       <List>
-//         {/* Menu Dashboard */}
-//         <ListItem button onClick={() => onMenuClick('dashboard')}>
-//           <ListItemIcon>
-//             <Home />
-//           </ListItemIcon>
-//           <ListItemText primary="Dashboard" />
-//         </ListItem>
-
-//         {/* Menu Product avec sous-catégories */}
-//         <ListItem button onClick={handleClick}>
-//           <ListItemIcon>
-//             <ShoppingBag />
-//           </ListItemIcon>
-//           <ListItemText primary="Product" />
-//           {openProduct ? <ExpandLess /> : <ExpandMore />}
-//         </ListItem>
-//         <Collapse in={openProduct} timeout="auto" unmountOnExit>
-//           <List component="div" disablePadding>
-//             <ListItem button onClick={() => onMenuClick('order-history')} sx={{ pl: 4 }}>
-//               <ListItemText primary="Order History" />
-//             </ListItem>
-//             <ListItem button onClick={() => onMenuClick('products')} sx={{ pl: 4 }}>
-//               <ListItemText primary="Products" />
-//             </ListItem>
-//             <ListItem button onClick={() => onMenuClick('add-product')} sx={{ pl: 4 }}>
-//               <ListItemText primary="Add Product" />
-//             </ListItem>
-//           </List>
-//         </Collapse>
-
-//         {/* Menu Pages */}
-//         <ListItem button onClick={() => onMenuClick('pages')}>
-//           <ListItemIcon>
-//             <ListAlt />
-//           </ListItemIcon>
-//           <ListItemText primary="Pages" />
-//         </ListItem>
-
-//         {/* Menu Calendar */}
-//         <ListItem button onClick={() => onMenuClick('calendar')}>
-//           <ListItemIcon>
-//             <CalendarToday />
-//           </ListItemIcon>
-//           <ListItemText primary="Calendar" />
-//         </ListItem>
-
-//         {/* Menu Tables */}
-//         <ListItem button onClick={() => onMenuClick('tables')}>
-//           <ListItemIcon>
-//             <TableChart />
-//           </ListItemIcon>
-//           <ListItemText primary="Tables" />
-//         </ListItem>
-//       </List>
-//     </div>
-//   );
-
-//   return (
-//     <>
-//       {/* Drawer permanent pour les grands écrans */}
-//       <Drawer
-//         sx={{
-//           width: drawerWidth,
-//           flexShrink: 0,
-//           display: { xs: 'none', sm: 'block' },
-//           '& .MuiDrawer-paper': {
-//             width: drawerWidth,
-//             boxSizing: 'border-box',
-//           },
-//         }}
-//         variant="permanent"
-//         open
-//       >
-//         {drawerContent}
-//       </Drawer>
-
-//       {/* Drawer temporaire pour les petits écrans (mobile/tablette) */}
-//       <Drawer
-//         variant="temporary"
-//         open={mobileOpen}
-//         onClose={handleDrawerToggle}
-//         ModalProps={{
-//           keepMounted: true, // Pour garder la performance sur mobile
-//         }}
-//         sx={{
-//           display: { xs: 'block', sm: 'none' },
-//           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-//         }}
-//       >
-//         {drawerContent}
-//       </Drawer>
-//     </>
-//   );
-// };
-
-// export default Sidebar;
-import React from 'react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Collapse, } from '@mui/material';
-import { Home, ExpandLess, ExpandMore, ShoppingBag, CalendarToday, ListAlt, TableChart } from '@mui/icons-material';
+import React, { useState } from 'react';
 import './Sidebar.css'; // Import du fichier CSS
 
-const drawerWidth = 240;
-
 const Sidebar = ({ onMenuClick, mobileOpen, handleDrawerToggle, isMobile }) => {
-  const [openProduct, setOpenProduct] = React.useState(false); // Gérer l'ouverture/fermeture du sous-menu "Product"
+  const [openProduct, setOpenProduct] = useState(false); 
+  const [openEvent, setOpenEvent] = useState(false);
+  const [openRestaurant, setOpenRestaurant] = useState(false);
+  const [openService, setOpenService] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const handleClick = () => {
-    setOpenProduct(!openProduct); // Ouvrir ou fermer le sous-menu
+  const handleClickProduct = () => {
+    setOpenProduct(!openProduct); 
   };
 
+  const handleClickEvent = () => {
+    setOpenEvent(!openEvent);
+  };
+
+  const handleClickRestaurant = () => {
+    setOpenRestaurant(!openRestaurant);
+  };
+
+  const handleClickService = () => {
+    setOpenService(!openService);
+  };
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
   const drawerContent = (
-    <div>
-      <List>
-        {/* Menu Dashboard */}
-        <ListItem button onClick={() => onMenuClick('dashboard')}>
-          <ListItemIcon>
-            <Home />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItem>
-
-        {/* Menu Product avec sous-catégories */}
-        <ListItem button onClick={handleClick}>
-          <ListItemIcon>
-            <ShoppingBag />
-          </ListItemIcon>
-          <ListItemText primary="Product" />
-          {openProduct ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openProduct} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button onClick={() => onMenuClick('order-history')} sx={{ pl: 4 }}>
-              <ListItemText primary="Order History" />
-            </ListItem>
-            <ListItem button onClick={() => onMenuClick('products')} sx={{ pl: 4 }}>
-              <ListItemText primary="Products" />
-            </ListItem>
-            <ListItem button onClick={() => onMenuClick('add-product')} sx={{ pl: 4 }}>
-              <ListItemText primary="Add Product" />
-            </ListItem>
-          </List>
-        </Collapse>
-
-        {/* Menu Pages */}
-        <ListItem button onClick={() => onMenuClick('pages')}>
-          <ListItemIcon>
-            <ListAlt />
-          </ListItemIcon>
-          <ListItemText primary="Pages" />
-        </ListItem>
-
-        {/* Menu Calendar */}
-        <ListItem button onClick={() => onMenuClick('calendar')}>
-          <ListItemIcon>
-            <CalendarToday />
-          </ListItemIcon>
-          <ListItemText primary="Calendar" />
-        </ListItem>
-
-        {/* Menu Tables */}
-        <ListItem button onClick={() => onMenuClick('tables')}>
-          <ListItemIcon>
-            <TableChart />
-          </ListItemIcon>
-          <ListItemText primary="Tables" />
-        </ListItem>
-      </List>
+    <div className="sidebar-container">
+      <ul>
+        <li className="list-item" onClick={() => onMenuClick('analytics')}>
+          <span className="list-item-icon">🏠</span>
+          <span className="list-item-text">Dashboard</span>
+        </li>
+        <li className="list-item" onClick={handleClickProduct}>
+          <span className="list-item-icon">🛍️</span>
+          <span className="list-item-text">Product</span>
+          {openProduct ? '↑' : '↓'}
+          {openProduct && (
+            <ul className="collapse">
+              <li className="list-item" onClick={() => onMenuClick('order-history')}>Order History</li>
+              <li className="list-item" onClick={() => onMenuClick('products')}>Products</li>
+              <li className="list-item" onClick={() => onMenuClick('add-product')}>Add Product</li>
+              <li className="list-item" onClick={() => onMenuClick('ads')}>Publicités</li>
+              <li className="list-item" onClick={() => onMenuClick('shipping-setting')}>Shipping Setting</li>
+            </ul>
+          )}
+        </li>
+        <li className="list-item" onClick={handleClickEvent}>
+          <span className="list-item-icon">📅</span>
+          <span className="list-item-text">Evenement</span>
+          {openEvent ? '↑' : '↓'}
+          {openEvent && (
+            <ul className="collapse">
+              <li className="list-item" onClick={() => onMenuClick('order-history')}>Order History</li>
+              <li className="list-item" onClick={() => onMenuClick('evenement')}>Event</li>
+              <li className="list-item" onClick={() => onMenuClick('add-event')}>Add Event</li>
+              <li className="list-item" onClick={() => onMenuClick('add-restaurant')}>Add Resto</li>
+              <li className="list-item" onClick={() => onMenuClick('add-service')}>Add service</li>
+            </ul>
+          )}
+        </li>
+        <li className="list-item" onClick={handleClickRestaurant}>
+          <span className="list-item-icon">🍽️</span>
+          <span className="list-item-text">Restaurant</span>
+          {openRestaurant ? '↑' : '↓'}
+          {openRestaurant && (
+            <ul className="collapse">
+              <li className="list-item" onClick={() => onMenuClick('order-history')}>Order History</li>
+              <li className="list-item" onClick={() => onMenuClick('restaurant')}>Restaurant</li>
+              <li className="list-item" onClick={() => onMenuClick('add-restaurant')}>Add Restaurant</li>
+            </ul>
+          )}
+        </li>
+        <li className="list-item" onClick={handleClickService}>
+          <span className="list-item-icon">🔧</span>
+          <span className="list-item-text">Service</span>
+          {openService ? '↑' : '↓'}
+          {openService && (
+            <ul className="collapse">
+              <li className="list-item" onClick={() => onMenuClick('order-history')}>Order History</li>
+              <li className="list-item" onClick={() => onMenuClick('service')}>Service</li>
+              <li className="list-item" onClick={() => onMenuClick('add-service')}>Add Service</li>
+            </ul>
+          )}
+        </li>
+        <li className="list-item" onClick={() => onMenuClick('pages')}>
+          <span className="list-item-icon">📄</span>
+          <span className="list-item-text">Formation</span>
+        </li>
+        <li className="list-item" onClick={() => onMenuClick('calendar')}>
+          <span className="list-item-icon">📅</span>
+          <span className="list-item-text">Calendar</span>
+        </li>
+        <li className="list-item" onClick={() => onMenuClick('tables')}>
+          <span className="list-item-icon">📊</span>
+          <span className="list-item-text">Tables</span>
+        </li>
+        <li className="list-item" onClick={() => onMenuClick('banner')}>
+          <span className="list-item-icon">📊</span>
+          <span className="list-item-text">Banner</span>
+        </li>
+      </ul>
     </div>
   );
 
   return (
     <>
-      {/* Drawer permanent pour les grands écrans */}
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          display: { xs: 'none', sm: 'block' },
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-            top: '74px', // Ajustement pour éviter la barre supérieure
-            height: 'calc(100% - 64px)', // S'arrête en dessous de la barre supérieure
-          },
-        }}
-        variant="permanent"
-        open
-      >
+      <button onClick={toggleSidebar} className="toggle-button">
+        {sidebarOpen ? '←' : '☰'}
+      </button>
+      <div className={`drawer ${sidebarOpen ? 'open' : ''}`}>
         {drawerContent}
-      </Drawer>
-
-      {/* Drawer temporaire pour les petits écrans (mobile/tablette) */}
-      <Drawer
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Pour garder la performance sur mobile
-        }}
-        sx={{
-          display: { xs: 'block', sm: 'none' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-        }}
-      >
-        {drawerContent}
-      </Drawer>
+      </div>
     </>
   );
 };
 
 export default Sidebar;
-
