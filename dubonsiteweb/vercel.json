@@ -1,7 +1,7 @@
 {
   "version": 2,
   "builds": [
-    { "src": "package.json", "use": "@vercel/static-build" }
+    {  "command": "npm ci && npm run build" }
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/" }
