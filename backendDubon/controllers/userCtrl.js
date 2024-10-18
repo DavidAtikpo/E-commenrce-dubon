@@ -24,29 +24,45 @@ const createUser =asyncHandler(async(req,res)=>{
   } 
 
 )
-// login User
-const loginUserCtrl = asyncHandler(async(req,res)=>{
-  const {email,password}= req.body;
-  const findUser = await User.findOne({email});
-  if(findUser && await findUser.isPasswordMatched(password)){
-    const refreshToken = await generateRefreshToken(findUser?.id)
-    const updateuser = await User.findByIdAndUpdate(findUser?.id, {refreshToken:refreshToken},{new:true})
-    res.cookie('refreshToken',refreshToken,{
-      httpOnly:true,
-      maxAge:72*60*60*1000,
-    })
-  res.json({
-    _id:findUser?._id,
-    firstname:findUser?.firstname,
-    lastname:findUser?.lastname,
-    mobile:findUser?.mobile,
-    token:generateToken(findUser?._id)
 
-  })
-  }else{
-    throw new Error("Invalid credentials")
+// login User
+const login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  
+  // Trouver l'utilisateur par email
+  const findUser = await User.findOne({ email });
+  
+  // Vérifier si l'utilisateur existe et si le mot de passe correspond
+  if (findUser && await findUser.isPasswordMatched(password)) {
+    
+    // Générer le refresh token et l'enregistrer dans la base de données
+    const refreshToken = generateRefreshToken(findUser._id);  // Utiliser _id au lieu de id
+    await User.findByIdAndUpdate(findUser._id, { refreshToken: refreshToken }, { new: true });
+
+    // Configurer le cookie contenant le refresh token
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === 'production',  // Le rendre sécurisé en production
+      maxAge: 72 * 60 * 60 * 1000,  // 3 jours
+    });
+
+    // Répondre avec les informations utilisateur et le token d'accès principal
+    console.log('user',findUser.name);
+    res.status(200).json({
+      _id: findUser._id,
+      name: findUser.name,
+      // lastname: findUser.lastname,
+      mobile: findUser.mobile,
+      token: generateToken(findUser._id),  // Générer le token d'accès principal
+    });
+    
+  } else {
+    // Si les informations d'identification sont incorrectes
+    res.status(401);
+    throw new Error("Invalid credentials");
   }
 });
+
 
 // get all Users
 
@@ -255,6 +271,28 @@ res.json("logout successfully")// forbidden
   await user.save();
   res.json(user);
   })
+  
+// upload profile image
+const uploadProfile = async (req, res) => {
+  try {
+      const { userId } = req.user._id;
+      const { profilePhotoURL } = req.body;
+      console.log("user", userId, profilePhotoURL);
+      
+
+      // Update profile photo URL for the user
+      const user = await User.findByIdAndUpdate(userId, { profilePhotoURL }, { new: true });
+
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.status(200).json({ message: 'Profile photo URL updated successfully', user });
+  } catch (error) {
+      console.error('Error updating profile photo URL:', error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 
-export default {createUser,loginUserCtrl,getAllUser,getUserById,deleteUserById,updateUser,blockUser,unblockUser,handleRefreshToken,logout,updatePassword,forgotPassword,resetPassword};
+export default {createUser,uploadProfile ,login,getAllUser,getUserById,deleteUserById,updateUser,blockUser,unblockUser,handleRefreshToken,logout,updatePassword,forgotPassword,resetPassword};

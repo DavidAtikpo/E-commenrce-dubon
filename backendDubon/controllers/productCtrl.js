@@ -2,6 +2,47 @@ import Product from "../models/productModel.js";
 import asyncHandler from "express-async-handler";
 import slugify from "slugify";
 
+// Créer un produit avec images
+const creatProduct = asyncHandler(async (req, res) => {
+  try {
+    // Convertir les données du produit en objet JavaScript
+    const productData = JSON.parse(req.body.productData);
+
+    // Vérifier si des fichiers sont présents dans la requête
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: 'No images uploaded' });
+    }
+
+    // Obtenir les chemins des images uploadées
+    const imagePaths = req.files.map((file) => {
+      return `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
+    });
+
+    // Créer un slug unique basé sur le titre ou le nom
+    const slug = slugify(productData.title || productData.name, { lower: true });
+
+    // Calculer le prix final après remise
+    const finalPrice = productData.discount
+      ? (parseFloat(productData.price) - (parseFloat(productData.price) * (parseFloat(productData.discount) / 100))).toFixed(2)
+      : parseFloat(productData.price).toFixed(2);
+
+    // Créer un nouvel objet produit avec les données et les images
+    const newProduct = new Product({
+      ...productData,
+      images: imagePaths,
+      slug,
+      finalPrice,
+    });
+
+    // Enregistrer le produit dans la base de données
+    await newProduct.save();
+
+    res.status(201).json({ message: 'Product created successfully', product: newProduct });
+  } catch (error) {
+    console.error('Error while creating product:', error);
+    res.status(500).json({ error: 'Failed to add product' });
+  }
+});
 
 // update product 
 
@@ -32,18 +73,8 @@ const deleteProduct = asyncHandler(async(req,res)=>{
   }
 })
 
-const createProduct = asyncHandler(async(req,res)=>{
-  try {
-    if(req.body.title){
-      req.body.slug = slugify(req.body.title);
-    }
-    const newProduct = await Product.create(req.body)
-    res.json(newProduct);
-  } catch (error) {
-    throw new Error(error)
-  }
-  
-});
+
+
 // get a product
 const getaProduct = asyncHandler(async(req,res)=>{
   try {
@@ -104,4 +135,4 @@ console.log(page, limit, skip);
   }
 })
 
-export default {createProduct,getaProduct,getAllProduct,updateProduct,deleteProduct}
+export default {creatProduct,getaProduct,getAllProduct,updateProduct,deleteProduct,}

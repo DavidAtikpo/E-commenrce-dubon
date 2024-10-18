@@ -1,57 +1,33 @@
-import mongoose from "mongoose"; // Erase if already required
+import mongoose from "mongoose";
 
-// Declare the Schema of the Mongo model
-var productSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true,
-       trim:true,
-    },
-    slug:{
-        type:String,
-        required:true,
-        unique:true,
-        lowercase:true,
-    },
-    description:{
-        type:String,
-        required:true,
-       
-    },
-    price:{
-        type:String,
-        required:true,
-    },
-    category:{
-      type: String,
-      required:true,
-    },
-    brand:{
-      type:String,
-      required:true,
-    },
-    quantity:{
-      type:Number,
-      required:true,
-    },
-    sold:{
-      type:Number,
-      default: 0,
-    },
-     images:{
-      type:Array,
-     },
-     color:{
-      type:String,
-      required:true,
-     },
-     ratings:[
-      {
-        star:Number,
-        postedby:{ type: mongoose.Schema.Types.ObjectId, ref:"User"},
-      },
-     ],
-},{timestamps:true});
+const productSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  slug: { type: String, unique: true, required: true },
+  description: String,
+  price: Number,
+  discount: Number,
+  finalPrice: Number,
+  category: String,
+  quantity: Number,
+  specifications: String,
+  variants: [String],
+  taxRate: Number,
+  availability: String,
+  dimensions: {
+    length: String,
+    width: String,
+    height: String,
+    weight: String,
+  },
+  tags: [String],
+  meta: {
+    title: String,
+    description: String,
+    keywords: [String],
+  },
+  images: [String],
+},{timestamps: true});
+ // Adds createdAt and updatedAt fields automatically
 
-//Export the model
+// Export the model
 export default mongoose.model("Product", productSchema);
