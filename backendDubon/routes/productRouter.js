@@ -7,7 +7,7 @@ import productController from '../controllers/productController.js'
 const router = express.Router();
 
 // Route pour ajouter un produit avec téléchargement d'images
-router.post('/add-products', upload.array('images', 10), productController.createProduct);
+router.post('/add-products', productController.createProduct);
 
 // Autres routes pour manipuler les produits
 router.get('/get-product/:productId', productController.getProductById);

@@ -173,48 +173,94 @@ const getProductById = async (req, res) => {
 // 
 
 
+// const createProduct = asyncHandler(async (req, res) => {
+//   try {
+//     // Vérifier si le corps de la requête est bien reçu
+//     console.log('Request body:', req.body);
+//     console.log('Request files:', req.files);
+
+//     let productData = {};
+
+//     // Vérifier si les données de produit sont envoyées sous forme de JSON ou d'objet
+//     if (req.body.productData && typeof req.body.productData === 'string') {
+//       productData = JSON.parse(req.body.productData);
+//     } else if (typeof req.body === 'object' && Object.keys(req.body).length > 0) {
+//       productData = req.body;
+//     } else {
+//       return res.status(400).json({ error: 'No product data provided' });
+//     }
+
+//     // Gestion des images (URL ou fichiers uploadés)
+//     let imagePaths = [];
+//     if (productData.imageURL) {
+//       imagePaths.push(productData.imageURL);
+//     } else if (req.files && req.files.length > 0) {
+//       // Si des fichiers d'images ont été uploadés
+//       imagePaths = req.files.map((file) => {
+//         return `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
+//       });
+//     } else {
+//       return res.status(400).json({ error: 'No images provided' });
+//     }
+
+//     // Créer un slug unique à partir du titre ou du nom
+//     const slug = slugify(productData.title || productData.name, { lower: true });
+
+//     // Calculer le prix final après application de la remise, s'il y a une remise
+//     const finalPrice = productData.discount
+//       ? (parseFloat(productData.price) - (parseFloat(productData.price) * (parseFloat(productData.discount) / 100))).toFixed(2)
+//       : parseFloat(productData.price).toFixed(2);
+
+//     // Créer un nouvel objet produit avec les données fournies
+//     const newProduct = new Product({
+//       ...productData,
+//       images: imagePaths,
+//       slug,
+//       finalPrice,
+//     });
+
+//     // Enregistrer le produit dans la base de données
+//     await newProduct.save();
+
+//     res.status(201).json({ message: 'Product created successfully', product: newProduct });
+//   } catch (error) {
+//     console.error('Error while creating product:', error);
+//     res.status(500).json({ error: 'Failed to add product' });
+//   }
+// });
+
+
 const createProduct = asyncHandler(async (req, res) => {
   try {
-    // Vérifier si le corps de la requête est bien reçu
-    console.log('Request body:', req.body);
-    console.log('Request files:', req.files);
-
+    // Vérifier si les données de produit sont présentes
     let productData = {};
 
-    // Vérifier si les données de produit sont envoyées sous forme de JSON ou d'objet
-    if (req.body.productData && typeof req.body.productData === 'string') {
-      productData = JSON.parse(req.body.productData);
-    } else if (typeof req.body === 'object' && Object.keys(req.body).length > 0) {
+    if (req.body && typeof req.body === 'object' && Object.keys(req.body).length > 0) {
       productData = req.body;
     } else {
       return res.status(400).json({ error: 'No product data provided' });
     }
 
-    // Gestion des images (URL ou fichiers uploadés)
+    // Vérifier si une URL d'image est fournie
     let imagePaths = [];
     if (productData.imageURL) {
       imagePaths.push(productData.imageURL);
-    } else if (req.files && req.files.length > 0) {
-      // Si des fichiers d'images ont été uploadés
-      imagePaths = req.files.map((file) => {
-        return `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
-      });
     } else {
-      return res.status(400).json({ error: 'No images provided' });
+      return res.status(400).json({ error: 'No image URL provided' });
     }
 
-    // Créer un slug unique à partir du titre ou du nom
+    // Créer un slug unique basé sur le titre ou le nom
     const slug = slugify(productData.title || productData.name, { lower: true });
 
-    // Calculer le prix final après application de la remise, s'il y a une remise
+    // Calculer le prix final après remise
     const finalPrice = productData.discount
       ? (parseFloat(productData.price) - (parseFloat(productData.price) * (parseFloat(productData.discount) / 100))).toFixed(2)
       : parseFloat(productData.price).toFixed(2);
 
-    // Créer un nouvel objet produit avec les données fournies
+    // Créer un nouvel objet produit avec les données et l'URL de l'image
     const newProduct = new Product({
       ...productData,
-      images: imagePaths,
+      images: imagePaths, // Enregistrer l'URL de l'image
       slug,
       finalPrice,
     });
